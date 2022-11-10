@@ -11,6 +11,10 @@
 
 /* HEADER */
 @import url('../blocks/header/header.css');
+@import url('../blocks/header/__divider/header__divider.css');
+
+/* LOGO */
+@import url('../blocks/logo/logo.css');
 
 /* FOOTER */
 @import url('../blocks/footer/footer.css');

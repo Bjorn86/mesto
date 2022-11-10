@@ -1,0 +1,8 @@
+.header {
+  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  font-family: "Inter", "Arial", sans-serif;
+  max-width: 100%;
+  padding: 0 200px;
+}
