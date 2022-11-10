@@ -1,0 +1,17 @@
+.profile__btn-add {
+  width: 150px;
+  height: 50px;
+  padding: 0;
+  cursor: pointer;
+  border: 2px solid #fff;
+  border-radius: 2px;
+  background: url('../../../images/profile-add.svg') center center/22px no-repeat;
+  transition: .6s;
+}
+
+@media screen and (max-width: 544px) {
+  .profile__btn-add {
+    width: 100%;
+    background-size: 16px;
+  }
+}
