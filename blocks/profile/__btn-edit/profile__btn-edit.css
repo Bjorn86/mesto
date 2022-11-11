@@ -5,7 +5,11 @@
   cursor: pointer;
   border: 1px solid #fff;
   background: url('../../../images/profile-edit.svg') center center/10px no-repeat;
-  transition: .6s;
+  transition: opacity .6s;
+}
+
+.profile__btn-edit:hover {
+  opacity: .6;
 }
 
 @media screen and (max-width: 544px) {
