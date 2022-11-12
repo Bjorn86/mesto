@@ -2,7 +2,7 @@
   margin: 0;
   font-weight: 400;
   font-size: 18px;
-  line-height: 1.22;
+  line-height: 1.21;
   color: #fff;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -10,8 +10,7 @@
 }
 
 @media screen and (max-width: 544px) {
-  .profile__user__descr {
+  .profile__user-descr {
     font-size: 14px;
-    line-height: 1.21;
   }
 }

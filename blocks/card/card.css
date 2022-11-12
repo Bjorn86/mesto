@@ -1,4 +1,5 @@
 .card {
+  font-family: "Inter", "Arial", sans-serif;
   width: 282px;
   height: 362px;
   display: flex;

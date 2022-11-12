@@ -4,12 +4,6 @@
   background: url('../../images/logo-light.svg') center center/contain no-repeat;
 }
 
-@media screen and (max-width: 896px) {
-  .logo {
-    padding-left: 27px;
-  }
-}
-
 @media screen and (max-width: 544px) {
   .logo {
     width: 104px;

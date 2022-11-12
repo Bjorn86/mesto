@@ -12,7 +12,7 @@
 </head>
 <body class="page">
   <header class="header">
-    <div class="logo"></div>
+    <div class="logo header__logo"></div>
   </header>
   <main class="content">
     <section class="profile">
@@ -81,11 +81,12 @@
       <button class="popup__btn-close"></button>
       <form action="#" id="edit-profile" class="popup__form">
         <h3 class="popup__form-title">Редактировать профиль</h3>
-        <input type="text" name="name" form="edit-profile" required placeholder="Введите ваше имя" class="popup__form-input">
-        <input type="text" name="description" form="edit-profile" required placeholder="Опишите кто вы" class="popup__form-input">
+        <input type="text" name="name" form="edit-profile" required placeholder="Введите ваше имя" class="popup__form-input" id="name-input">
+        <input type="text" name="description" form="edit-profile" required placeholder="Опишите кто вы" class="popup__form-input" id="job-input">
         <button form="edit-profile" class="popup__form-btn-submit">Сохранить</button>
       </form>
     </div>
   </section>
+  <script src="./scripts/index.js"></script>
 </body>
 </html>
