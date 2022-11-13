@@ -7,6 +7,12 @@
   gap: 8px;
 }
 
+@media screen and (max-width: 896px) {
+  .profile__user-wrapper {
+    max-width: 260px;
+  }
+}
+
 @media screen and (max-width: 544px) {
   .profile__user-wrapper {
     max-width: 220px;

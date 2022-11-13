@@ -1,7 +1,7 @@
 /* POPUP VARIABLES */
 const formElement = document.querySelector('.popup');
-const nameInput = formElement.querySelector('#name-input');
-const jobInput = formElement.querySelector('#job-input');
+const nameInput = formElement.querySelector('.popup__form-input_substitution_name');
+const jobInput = formElement.querySelector('.popup__form-input_substitution_job');
 const popupCloseButtonElement = formElement.querySelector('.popup__btn-close');
 
 /* PROFILE VARIABLES */
