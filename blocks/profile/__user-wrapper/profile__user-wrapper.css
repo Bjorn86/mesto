@@ -1,4 +1,6 @@
 .profile__user-wrapper {
+  max-width: 300px;
+  position: relative;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -7,6 +9,6 @@
 
 @media screen and (max-width: 544px) {
   .profile__user-wrapper {
-    align-items: center;
+    max-width: 220px;
   }
 }
