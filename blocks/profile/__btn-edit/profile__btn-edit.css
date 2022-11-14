@@ -1,9 +1,7 @@
 .profile__btn-edit {
-  position: absolute;
-  width: 24px;
-  height: 24px;
-  top: 36px;
-  right: -44px;
+  display: inline-flex;
+  min-width: 24px;
+  min-height: 24px;
   padding: 0;
   cursor: pointer;
   border: 1px solid #fff;
@@ -17,8 +15,9 @@
 
 @media screen and (max-width: 544px) {
   .profile__btn-edit {
-    width: 18px;
-    height: 18px;
+    position: absolute;
+    min-width: 18px;
+    min-height: 18px;
     top: 8px;
     right: -28px;
     background-size: 7.5px;

@@ -1,8 +1,9 @@
 /* POPUP VARIABLES */
-const formElement = document.querySelector('.popup');
+const popupElement = document.querySelector('.popup');
+const formElement = popupElement.querySelector('.popup__form');
 const nameInput = formElement.querySelector('.popup__form-input_substitution_name');
 const jobInput = formElement.querySelector('.popup__form-input_substitution_job');
-const popupCloseButtonElement = formElement.querySelector('.popup__btn-close');
+const popupCloseButtonElement = popupElement.querySelector('.popup__btn-close');
 
 /* PROFILE VARIABLES */
 const profileElement = document.querySelector('.profile__wrapper');
@@ -12,14 +13,14 @@ const profileEditButtonElement = profileElement.querySelector('.profile__btn-edi
 
 /* OPEN POPUP AND DATA SUBSTITUTION FUNCTION */
 function openPopup() {
-  formElement.classList.add('popup_opened');
+  popupElement.classList.add('popup_opened');
   nameInput.value = profileName.textContent;
   jobInput.value = profileJob.textContent;
 }
 
 /* CLOSE POPUP FUNCTION */
 function closePopup() {
-  formElement.classList.remove('popup_opened');
+  popupElement.classList.remove('popup_opened');
 }
 
 /* FORM SUBMIT FUNCTION */

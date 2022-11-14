@@ -1,5 +1,5 @@
 .profile__user-descr {
-  width: 100%;
+  max-width: 85%;
   margin: 0;
   font-weight: 400;
   font-size: 18px;
@@ -12,6 +12,7 @@
 
 @media screen and (max-width: 544px) {
   .profile__user-descr {
+    max-width: 90%;
     font-size: 14px;
     text-align: center;
   }
