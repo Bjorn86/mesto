@@ -5,8 +5,11 @@
   position: fixed;
   left: 0;
   top: 0;
-  display: none;
+  visibility: hidden;
+  opacity: 0;
+  display: flex;
   justify-content: center;
   align-items: center;
   background-color: rgba(0, 0, 0, .5);
+  transition: visibility .6s, opacity .6s;
 }

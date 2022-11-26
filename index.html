@@ -29,70 +29,52 @@
       <button type="button" class="profile__btn-add"></button>
     </section>
     <section class="cards" aria-label="Секция с карточками">
-      <article class="card">
-        <img src="./images/baikal.jpg" alt="Ночная фотограия озера Байкал на фоне звёздного неба" class="card__img">
-        <button type="button" class="card__btn-del"></button>
-        <div class="card__caption">
-          <h2 class="card__title">Озеро Байкал</h2>
-          <button type="button" class="card__btn-like"></button>
-        </div>
-      </article>
-      <article class="card">
-        <img src="./images/kareliya.jpg" alt="Фотография горных склонов и реки в Карелии" class="card__img">
-        <button type="button" class="card__btn-del"></button>
-        <div class="card__caption">
-          <h2 class="card__title">Карелия</h2>
-          <button type="button" class="card__btn-like"></button>
-        </div>
-      </article>
-      <article class="card">
-        <img src="./images/kazan.jpg" alt="Ночная фотограия Казанского кремля" class="card__img">
-        <button type="button" class="card__btn-del"></button>
-        <div class="card__caption">
-          <h2 class="card__title">Казань</h2>
-          <button type="button" class="card__btn-like"></button>
-        </div>
-      </article>
-      <article class="card">
-        <img src="./images/krasnaya-polyana.jpg" alt="Фотограия гор горнолыжного курорта Красная поляна" class="card__img">
-        <button type="button" class="card__btn-del"></button>
-        <div class="card__caption">
-          <h2 class="card__title">Красная поляна</h2>
-          <button type="button" class="card__btn-like"></button>
-        </div>
-      </article>
-      <article class="card">
-        <img src="./images/krasnoyarsk-stolbi.jpg" alt="Фотография горных склонов парка Красноярские столбы" class="card__img">
-        <button type="button" class="card__btn-del"></button>
-        <div class="card__caption">
-          <h2 class="card__title">Красноярские столбы</h2>
-          <button type="button" class="card__btn-like"></button>
-        </div>
-      </article>
-      <article class="card">
-        <img src="./images/sheregesh.jpg" alt="Фотография гор горнолыжного курорта Шерегеш" class="card__img">
-        <button type="button" class="card__btn-del"></button>
-        <div class="card__caption">
-          <h2 class="card__title">Шерегеш</h2>
-          <button type="button" class="card__btn-like"></button>
-        </div>
-      </article>
     </section>
   </main>
   <footer class="footer">
     <p class="footer__copyright">&copy; 2022 Данила Легкобытов</p>
   </footer>
   <div class="popup">
-    <div class="popup__container">
+    <div class="popup__form-container">
       <h2 class="popup__title">Редактировать профиль</h2>
       <button type="button" class="popup__btn-close"></button>
-      <form action="#" name="edit-profile" id="edit-profile" class="popup__form">
+      <form action="#" name="edit-profile" id="edit-profile" class="popup__form popup__form_type_edit-profile">
         <input type="text" name="name" form="edit-profile" required placeholder="Введите ваше имя" class="popup__form-input popup__form-input_substitution_name">
         <input type="text" name="description" form="edit-profile" required placeholder="Опишите кто вы" class="popup__form-input popup__form-input_substitution_job">
         <button type="submit" form="edit-profile" class="popup__form-btn-submit">Сохранить</button>
       </form>
     </div>
   </div>
-  <script src="./scripts/index.js"></script>
+  <div class="popup">
+    <div class="popup__form-container">
+      <h2 class="popup__title">Новое место</h2>
+      <button type="button" class="popup__btn-close"></button>
+      <form action="#" name="add-card" id="add-card" class="popup__form popup__form_type_add-card">
+        <input type="text" name="place-name" form="add-card" required placeholder="Название" class="popup__form-input popup__form-input_substitution_place-name">
+        <input type="text" name="link-img" form="add-card" required placeholder="Ссылка на картинку" class="popup__form-input popup__form-input_substitution_link-img">
+        <button type="submit" form="add-card" class="popup__form-btn-submit">Создать</button>
+      </form>
+    </div>
+  </div>
+  <div class="popup popup_theme_darker">
+    <div class="popup__img-container">
+      <button type="button" class="popup__btn-close"></button>
+      <figure class="popup__figure-wrapper">
+        <img src="#" alt="Описание изображения" class="popup__img">
+        <figcaption class="popup__img-caption"></figcaption>
+      </figure>
+    </div>
+  </div>
+  <template class="card-template">
+    <article class="card">
+      <button type="button" class="card__btn-del"></button>
+      <img src="" alt="Описание изображения" class="card__img">
+      <div class="card__caption">
+        <h2 class="card__title"></h2>
+        <button type="button" class="card__btn-like"></button>
+      </div>
+    </article>
+  </template>
+  <script src="./scripts/index.js" type="module"></script>
 </body>
 </html>
