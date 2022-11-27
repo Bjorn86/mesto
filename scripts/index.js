@@ -2,8 +2,11 @@
 import { initialCards } from './array.js';
 
 /* COMMON POPUP VARIABLES */
-const popupElement = document.querySelectorAll('.popup');
-const popupCloseButtonElement = document.querySelectorAll('.popup__btn-close');
+const popupElements = document.querySelectorAll('.popup');
+const popupCloseButtonElements = document.querySelectorAll('.popup__btn-close');
+const popupEditProfileElement = document.querySelector('.popup_type_edit-profile');
+const popupAddCardElement = document.querySelector('.popup_type_add-card');
+const popupImageElement = document.querySelector('.popup_type_img');
 
 /* EDIT PROFILE POPUP VARIABLES */
 const editProfileFormElement = document.querySelector('.popup__form_type_edit-profile');
@@ -44,8 +47,9 @@ function initialCardsCreate(item) {
   // CARD ELEMENTS SUBSTITUTION
   cardTtitleElement.textContent = item.name;
   cardImageElement.src = item.link;
+  cardImageElement.alt = item.name;
   // IMAGE POPUP EVENT LISTENER
-  cardImageElement.addEventListener('click', imagePopupHandler)
+  cardImageElement.addEventListener('click', imagePopupHandler);
   // CARD BUTTONS EVENT LISTENER
   cardLikeButtonElement.addEventListener('click', likeCardHandler);
   cardDeleteButtonElement.addEventListener('click', deleteCardHandler);
@@ -55,8 +59,9 @@ function initialCardsCreate(item) {
 /* IMAGE POPUP FUNCTION */
 const imagePopupHandler = (evt) => {
   imgPopupElement.src = evt.target.src;
-  captionImgPopupElement.textContent = evt.target.nextElementSibling.firstElementChild.textContent;
-  openPopup(2);
+  imgPopupElement.alt = evt.target.closest('.card').querySelector('.card__title').textContent;
+  captionImgPopupElement.textContent = evt.target.closest('.card').querySelector('.card__title').textContent;
+  openPopup(popupImageElement);
 }
 
 /* CARD LIKE ADD/REMOVE FUNCTION */
@@ -95,16 +100,17 @@ const addCardFormSubmitHandler = (evt) => {
   };
   addedRenderCardElement(addedElement, cardsContainerElement);
   closePopup();
+  evt.target.reset();
 }
 
 /* OPEN POPUP FUNCTION */
-const openPopup = (index) => {
-  popupElement[index].classList.add('popup_opened');
+const openPopup = (popup) => {
+  popup.classList.add('popup_opened');
 }
 
 /* CLOSE POPUP FUNCTION */
 const closePopup = () => {
-  popupElement.forEach(function (element) {
+  popupElements.forEach(function (element) {
     element.classList.remove('popup_opened');
   })
 }
@@ -125,11 +131,11 @@ const editProfileFormSubmitHandler = (evt) => {
 
 /* OPEN AND CLOSE POPUPS EVENT LISTENER */
 profileEditButtonElement.addEventListener('click', () => {
-  openPopup(0);
+  openPopup(popupEditProfileElement);
   editProfileDataSubstitution();
 });
-addCardButtonElement.addEventListener('click', () => openPopup(1));
-popupCloseButtonElement.forEach( (element) => element.addEventListener('click', closePopup) );
+addCardButtonElement.addEventListener('click', () => openPopup(popupAddCardElement));
+popupCloseButtonElements.forEach( (element) => element.addEventListener('click', closePopup) );
 
 /* FORMS SUBMIT EVENT LISTENER */
 editProfileFormElement.addEventListener('submit', editProfileFormSubmitHandler);
