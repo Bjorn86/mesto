@@ -40,12 +40,12 @@ const cardTemplateElement = document.querySelector('.card-template').content.que
 function initialCardsCreate(item) {
   // CARD ELEMENTS VARIABLES
   const cardElement = cardTemplateElement.cloneNode(true);
-  const cardTtitleElement = cardElement.querySelector('.card__title');
+  const cardTitleElement = cardElement.querySelector('.card__title');
   const cardImageElement = cardElement.querySelector('.card__img');
   const cardLikeButtonElement = cardElement.querySelector('.card__btn-like');
   const cardDeleteButtonElement = cardElement.querySelector('.card__btn-del');
   // CARD ELEMENTS SUBSTITUTION
-  cardTtitleElement.textContent = item.name;
+  cardTitleElement.textContent = item.name;
   cardImageElement.src = item.link;
   cardImageElement.alt = item.name;
   // IMAGE POPUP EVENT LISTENER
