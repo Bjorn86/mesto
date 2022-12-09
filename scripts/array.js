@@ -1,4 +1,6 @@
+//EXPORT
 export { initialCards };
+
 /* INITIAL CARDS ARRAY */
 const initialCards = [
   {

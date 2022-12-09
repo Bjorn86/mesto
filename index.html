@@ -37,10 +37,10 @@
   <div class="popup popup_type_edit-profile">
     <div class="popup__form-container">
       <h2 class="popup__title">Редактировать профиль</h2>
-      <button type="button" class="popup__btn-close"></button>
+      <button type="button" class="popup__btn-close popup__btn-close_place_edit-profile"></button>
       <form action="#" name="edit-profile" id="edit-profile" class="popup__form popup__form_type_edit-profile" novalidate>
         <label class="popup__input-wrapper">
-          <input type="text" name="name" form="edit-profile" required placeholder="Введите ваше имя" minlength="2" maxlength="40" class="popup__form-input popup__form-input_substitution_name" id="name-input">
+          <input type="text" name="name" form="edit-profile" required placeholder="Введите ваше имя" minlength="2" maxlength="40" class="popup__form-input popup__form-input_substitution_name" id="name-input" autofocus>
           <span class="name-input-error popup__form-input-error"></span>
         </label>
         <label class="popup__input-wrapper">
@@ -54,7 +54,7 @@
   <div class="popup popup_type_add-card">
     <div class="popup__form-container">
       <h2 class="popup__title">Новое место</h2>
-      <button type="button" class="popup__btn-close"></button>
+      <button type="button" class="popup__btn-close popup__btn-close_place_add-card"></button>
       <form action="#" name="add-card" id="add-card" class="popup__form popup__form_type_add-card" novalidate>
         <label class="popup__input-wrapper">
           <input type="text" name="place-name" form="add-card" required placeholder="Название" minlength="2" maxlength="30" class="popup__form-input popup__form-input_substitution_place-name" id="place-input">
@@ -70,7 +70,7 @@
   </div>
   <div class="popup popup_type_img popup_theme_darker">
     <div class="popup__img-container">
-      <button type="button" class="popup__btn-close"></button>
+      <button type="button" class="popup__btn-close popup__btn-close_place_img"></button>
       <figure class="popup__figure-wrapper">
         <img src="#" alt="Описание изображения" class="popup__img">
         <figcaption class="popup__img-caption"></figcaption>
@@ -88,6 +88,6 @@
     </article>
   </template>
   <script src="./scripts/index.js" type="module"></script>
-  <script src="./scripts/validate.js"></script>
+  <script src="./scripts/validate.js" type="module"></script>
 </body>
 </html>

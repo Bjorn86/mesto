@@ -1,11 +1,10 @@
 .popup__form-input-error {
-  position: absolute;
-  top: calc(100% + 5px);
-  left: 0;
+  display: block;
+  min-height: 25px;
+  margin-top: 5px;
   opacity: 0;
-  transition: opacity .3s;
   font-weight: 400;
   font-size: 12px;
-  line-height: 1.15;
+  line-height: 1.04;
   color: #FF0000;
 }

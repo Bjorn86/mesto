@@ -1,7 +1,7 @@
 .popup__form-btn-submit {
   min-height: 50px;
   padding: 0;
-  margin-top: 48px;
+  margin-top: 18px;
   border: none;
   background-color: #000;
   cursor: pointer;
@@ -20,7 +20,7 @@
 @media screen and (max-width: 544px) {
   .popup__form-btn-submit {
     min-height: 46px;
-    margin-top: 45px;
+    margin-top: 15px;
     font-size: 14px;
   }
 }
