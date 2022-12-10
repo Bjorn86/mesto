@@ -29,6 +29,7 @@
       <button type="button" class="profile__btn-add"></button>
     </section>
     <section class="cards" aria-label="Секция с карточками">
+      <ul class="cards__wrapper"></ul>
     </section>
   </main>
   <footer class="footer">
@@ -78,14 +79,14 @@
     </div>
   </div>
   <template class="card-template">
-    <article class="card">
+    <li class="card">
       <button type="button" class="card__btn-del"></button>
       <img src="#" alt="Описание изображения" class="card__img">
       <div class="card__caption">
         <h2 class="card__title"></h2>
         <button type="button" class="card__btn-like"></button>
       </div>
-    </article>
+    </li>
   </template>
   <script src="./scripts/index.js" type="module"></script>
   <script src="./scripts/validate.js" type="module"></script>

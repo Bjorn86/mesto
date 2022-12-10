@@ -28,6 +28,7 @@
 
 /* CARDS */
 @import url('../blocks/cards/cards.css');
+@import url('../blocks/cards/__wrapper/cards__wrapper.css');
 
 /* CARD */
 @import url('../blocks/card/card.css');

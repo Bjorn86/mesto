@@ -1,10 +1,6 @@
 .cards {
   font-family: "Inter", "Arial", sans-serif;
   max-width: 100%;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(282px, 1fr));
-  justify-items: center;
-  gap: 20px 17px;
 }
 
 @media screen and (max-width: 896px) {
