@@ -1,50 +1,50 @@
 //IMPORT COMMON VARIABLES
-import { escapeButton } from './variables.js';
+import { escapeButton } from './constants.js';
 
 //IMPORT COMMON POPUP VARIABLES
-import { popupElements } from './variables.js';
-import { popupEditProfileElement } from './variables.js';
-import { popupAddCardElement } from './variables.js';
-import { popupImageElement } from './variables.js';
-import { popupCloseButtonEditProfileElement } from './variables.js';
-import { popupCloseButtonAddCardElement } from './variables.js';
-import { popupCloseButtonImageElement } from './variables.js';
+import { popupElements } from './constants.js';
+import { popupEditProfileElement } from './constants.js';
+import { popupAddCardElement } from './constants.js';
+import { popupImageElement } from './constants.js';
+import { popupCloseButtonEditProfileElement } from './constants.js';
+import { popupCloseButtonAddCardElement } from './constants.js';
+import { popupCloseButtonImageElement } from './constants.js';
 
 //IMPORT EDIT PROFILE POPUP VARIABLES
-import { editProfileFormElement } from './variables.js';
-import { nameInputElement } from './variables.js';
-import { jobInputElement } from './variables.js';
+import { editProfileFormElement } from './constants.js';
+import { nameInputElement } from './constants.js';
+import { jobInputElement } from './constants.js';
 
 //IMPORT ADD CARD POPUP VARIABLES
-import { addCardFormElement } from './variables.js';
-import { placeNameInputElement } from './variables.js';
-import { linkImageInputElement } from './variables.js';
+import { addCardFormElement } from './constants.js';
+import { placeNameInputElement } from './constants.js';
+import { linkImageInputElement } from './constants.js';
 
 //IMPORT IMAGE POPUP VARIABLES
-import { imgPopupElement } from './variables.js';
-import { captionImgPopupElement } from './variables.js';
+import { imgPopupElement } from './constants.js';
+import { captionImgPopupElement } from './constants.js';
 
 //IMPORT PROFILE VARIABLES
-import { profileNameElement } from './variables.js';
-import { profileJobElement } from './variables.js';
-import { profileEditButtonElement } from './variables.js';
-import { addCardButtonElement } from './variables.js';
+import { profileNameElement } from './constants.js';
+import { profileJobElement } from './constants.js';
+import { profileEditButtonElement } from './constants.js';
+import { addCardButtonElement } from './constants.js';
 
 //IMPORT CARDS VARIABLES
-import { cardsContainerElement } from './variables.js';
+import { cardsContainerElement } from './constants.js';
 
 //IMPORT TEMPLATES VARIABLES
-import { cardTemplateElement } from './variables.js';
+import { cardTemplateElement } from './constants.js';
 
 //IMPORT INITIAL CARDS ARRAY
-import { initialCards } from './variables.js';
+import { initialCards } from './constants.js';
 
 //IMPORT VALIDATION FUNCTIONS
 import { enableValidation } from './validate.js';
 import { resetValidationsErrors } from './validate.js';
 
 //IMPORT VALIDATION CONFIG
-import { validationConfig } from './variables.js';
+import { validationConfig } from './constants.js';
 
 //CARD CREATE FUNCTION
 const createCard = (item) => {
@@ -62,7 +62,7 @@ const createCard = (item) => {
   cardImageElement.addEventListener('click', handleImagePopup);
   // CARD BUTTONS EVENT LISTENER
   cardLikeButtonElement.addEventListener('click', handleLikeButton);
-  cardDeleteButtonElement.addEventListener('click', deleteCardHandler);
+  cardDeleteButtonElement.addEventListener('click', handleCardDelete );
   return cardElement;
 }
 
@@ -80,35 +80,35 @@ const handleLikeButton = (evt) => {
 }
 
 //CARD DELETE FUNCTION
-const deleteCardHandler = (evt) => {
+const handleCardDelete  = (evt) => {
   evt.target.closest('.card').remove();
 }
 
 //CARD RENDER FUNCTION
-const renderCardHandler = (item, wrapperElement) => {
+const handleCardRender = (item, wrapperElement) => {
   const element = createCard(item);
   wrapperElement.append(element);
 }
 
 //ADDED CARD RENDER FUNCTION
-const renderAddedCardHandler = (item, wrapperElement) => {
+const handleAddedCardRender = (item, wrapperElement) => {
   const element = createCard(item);
   wrapperElement.prepend(element);
 }
 
 //INITIAL CARDS CREATE FUNCTION
 initialCards.forEach((item) => {
-  renderCardHandler(item, cardsContainerElement);
+  handleCardRender(item, cardsContainerElement);
 })
 
 //ADD CARD FORM SUBMIT FUNCTION
-const addCardFormSubmitHandler = (evt) => {
+const cardAdditionFormHandler = (evt) => {
   evt.preventDefault();
   const addedElement = {
     name: placeNameInputElement.value,
     link: linkImageInputElement.value
   };
-  renderAddedCardHandler(addedElement, cardsContainerElement);
+  handleAddedCardRender(addedElement, cardsContainerElement);
   closePopup(popupAddCardElement);
   evt.target.reset();
 }
@@ -142,11 +142,10 @@ const closePopupByDownEscButton = (evt) => {
 }
 
 //EDIT PROFILE DATA SUBSTITUTION FUNCTION
-const editProfileDataSubstitution = () => {
+const handleEditProfileDataSubstitution = () => {
   nameInputElement.value = profileNameElement.textContent;
   jobInputElement.value = profileJobElement.textContent;
 }
-editProfileDataSubstitution();
 
 //EDIT PROFILE FORM SUBMIT FUNCTION
 const editProfileFormSubmitHandler = (evt) => {
@@ -158,7 +157,7 @@ const editProfileFormSubmitHandler = (evt) => {
 
 //OPEN POPUP EVENT LISTENERS
 profileEditButtonElement.addEventListener('click', () => {
-  editProfileDataSubstitution();
+  handleEditProfileDataSubstitution();
   resetValidationsErrors(editProfileFormElement, validationConfig);
   enableValidation(validationConfig);
   openPopup(popupEditProfileElement);
@@ -176,4 +175,4 @@ popupElements.forEach((element) => element.addEventListener('click', closePopupB
 
 //FORM SUBMIT EVENT LISTENERS
 editProfileFormElement.addEventListener('submit', editProfileFormSubmitHandler);
-addCardFormElement.addEventListener('submit', addCardFormSubmitHandler);
+addCardFormElement.addEventListener('submit', cardAdditionFormHandler);
