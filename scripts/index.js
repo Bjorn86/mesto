@@ -59,7 +59,9 @@ const createCard = (item) => {
   cardImageElement.src = item.link;
   cardImageElement.alt = item.name;
   // IMAGE POPUP EVENT LISTENER
-  cardImageElement.addEventListener('click', handleImagePopup);
+  cardImageElement.addEventListener('click', () => {
+    handleImagePopup(cardTitleElement, cardImageElement)
+  });
   // CARD BUTTONS EVENT LISTENER
   cardLikeButtonElement.addEventListener('click', handleLikeButton);
   cardDeleteButtonElement.addEventListener('click', handleCardDelete );
@@ -67,10 +69,10 @@ const createCard = (item) => {
 }
 
 //IMAGE POPUP FUNCTION
-const handleImagePopup = (evt) => {
-  imgPopupElement.src = evt.target.src;
-  imgPopupElement.alt = evt.target.closest('.card').querySelector('.card__title').textContent;
-  captionImgPopupElement.textContent = evt.target.closest('.card').querySelector('.card__title').textContent;
+const handleImagePopup = (cardTitleElement, cardImageElement) => {
+  imgPopupElement.src = cardImageElement.src;
+  imgPopupElement.alt = cardTitleElement.textContent;
+  captionImgPopupElement.textContent = cardTitleElement.textContent;
   openPopup(popupImageElement);
 }
 
