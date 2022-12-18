@@ -40,8 +40,8 @@ import { cardTemplateElement } from './constants.js';
 import { initialCards } from './constants.js';
 
 //IMPORT VALIDATION FUNCTIONS
-import { enableValidation } from './validate.js';
 import { resetValidationsErrors } from './validate.js';
+import { handleButtonCheckValidity } from './validate.js'
 
 //IMPORT VALIDATION CONFIG
 import { validationConfig } from './constants.js';
@@ -64,7 +64,7 @@ const createCard = (item) => {
   });
   // CARD BUTTONS EVENT LISTENER
   cardLikeButtonElement.addEventListener('click', handleLikeButton);
-  cardDeleteButtonElement.addEventListener('click', handleCardDelete );
+  cardDeleteButtonElement.addEventListener('click', handleCardDelete);
   return cardElement;
 }
 
@@ -161,11 +161,10 @@ const editProfileFormSubmitHandler = (evt) => {
 profileEditButtonElement.addEventListener('click', () => {
   handleEditProfileDataSubstitution();
   resetValidationsErrors(editProfileFormElement, validationConfig);
-  enableValidation(validationConfig);
+  handleButtonCheckValidity(editProfileFormElement, validationConfig);
   openPopup(popupEditProfileElement);
 });
 addCardButtonElement.addEventListener('click', () => {
-  enableValidation(validationConfig);
   openPopup(popupAddCardElement);
 });
 

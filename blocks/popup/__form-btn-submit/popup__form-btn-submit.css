@@ -17,6 +17,13 @@
   opacity: .8;
 }
 
+.popup__form-btn-submit:disabled {
+  background-color: #fff;
+  border: 1px solid rgba(0, 0, 0, .2);
+  color: rgba(0, 0, 0, .2);
+  pointer-events: none;
+}
+
 @media screen and (max-width: 544px) {
   .popup__form-btn-submit {
     min-height: 46px;

@@ -1,4 +1,7 @@
-//ERROR SHOW/HIDE FUNCTIONS
+// IMPORT VALIDATION CONFIG
+import { validationConfig } from './constants.js';
+
+// ERROR SHOW/HIDE FUNCTIONS
 const showError = (formSelector, inputSelector, errorMessage, validationConfig) => {
   const { inputErrorClass, errorClass } = validationConfig;
   const errorElement = formSelector.querySelector(`.${inputSelector.id}-error`);
@@ -15,64 +18,69 @@ const hideError = (formSelector, inputSelector, validationConfig) => {
   errorElement.textContent = '';
 }
 
-//CHECK INPUT VALIDITY FUNCTION
+// CHECK INPUT VALIDITY FUNCTION
 const checkInputValidity = (formSelector, inputSelector, validationConfig) => {
-  if (!inputSelector.validity.valid) {
-    showError(formSelector, inputSelector, inputSelector.validationMessage, validationConfig);
-  } else {
-    hideError(formSelector, inputSelector, validationConfig);
-  }
+  !inputSelector.validity.valid
+    ? showError(formSelector, inputSelector, inputSelector.validationMessage, validationConfig)
+    : hideError(formSelector, inputSelector, validationConfig)
 }
 
-//INVALID INPUT CHECK FUNCTION
+// INVALID INPUT CHECK FUNCTION
 const hasInvalidInput = (inputList) => {
   return inputList.some((inputSelector) => {
     return !inputSelector.validity.valid;
   });
 }
 
-//TOGGLE BUTTON ACTIVE/DISABLED FUNCTION
-const toggleButtonState = (inputList, buttonElement, validationConfig) => {
-  const { inactiveButtonClass } = validationConfig;
-  if (hasInvalidInput(inputList)) {
-    buttonElement.classList.add(inactiveButtonClass);
-  } else {
-    buttonElement.classList.remove(inactiveButtonClass);
-  }
+// TOGGLE BUTTON ACTIVE/DISABLED FUNCTION
+const toggleButtonState = (inputList, buttonElement) => {
+  hasInvalidInput(inputList)
+    ? buttonElement.disabled = true
+    : buttonElement.disabled = false
 }
 
-//SET EVENT LISTENERS FUNCTION
+// SET EVENT LISTENERS FUNCTION
 const setEventListeners = (formSelector, validationConfig) => {
   const { inputSelector, submitButtonSelector, ...restConfig } = validationConfig;
   const inputList = [...formSelector.querySelectorAll(inputSelector)];
   const buttonElement = formSelector.querySelector(submitButtonSelector);
-  toggleButtonState(inputList, buttonElement, restConfig);
+  toggleButtonState(inputList, buttonElement);
   inputList.forEach((inputSelector) => {
     inputSelector.addEventListener('input', () => {
       checkInputValidity(formSelector, inputSelector, restConfig);
-      toggleButtonState(inputList, buttonElement, restConfig);
-    })
-  })
+      toggleButtonState(inputList, buttonElement);
+    });
+  });
+  formSelector.addEventListener('reset', () => {
+    setTimeout(() => {
+      toggleButtonState(inputList, buttonElement);
+    }, 0);
+  });
 }
 
-//ENABLE VALIDATION FUNCTION
-export const enableValidation = (validationConfig) => {
+// ENABLE VALIDATION FUNCTION
+const enableValidation = (validationConfig) => {
   const { formSelector, ...restConfig } = validationConfig;
   const formList = [...document.querySelectorAll(formSelector)];
   formList.forEach((formSelector) => {
-    formSelector.addEventListener('submit', (evt) => {
-      evt.preventDefault();
-    })
     setEventListeners(formSelector, restConfig);
   })
 }
+enableValidation(validationConfig);
 
-//RESET VALIDATION ERRORS FUNCTION
+// RESET VALIDATION ERRORS FUNCTION
 export const resetValidationsErrors = (formSelector, validationConfig) => {
-  const inputList = Array.from(formSelector.querySelectorAll(validationConfig.inputSelector));
+  const inputList = [...formSelector.querySelectorAll(validationConfig.inputSelector)];
   inputList.forEach((inputSelector) => {
     if (inputSelector.classList.contains(validationConfig.inputErrorClass)) {
       hideError(formSelector, inputSelector, validationConfig);
     }
   })
+}
+
+// CHECK BUTTON VALIDITY FUNCTION
+export const handleButtonCheckValidity = (formSelector, validationConfig) => {
+  const inputList = [...formSelector.querySelectorAll(validationConfig.inputSelector)];
+  const buttonElement = formSelector.querySelector(validationConfig.submitButtonSelector);
+  toggleButtonState(inputList, buttonElement);
 }
