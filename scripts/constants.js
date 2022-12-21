@@ -2,7 +2,7 @@
 export const escapeButton = 'Escape';
 
 //COMMON POPUP VARIABLES
-export const popupElements = document.querySelectorAll('.popup');
+export const popupElements = [...document.querySelectorAll('.popup')];
 export const popupEditProfileElement = document.querySelector('.popup_type_edit-profile');
 export const popupAddCardElement = document.querySelector('.popup_type_add-card');
 export const popupImageElement = document.querySelector('.popup_type_img');
@@ -68,10 +68,8 @@ export const initialCards = [
 
 //VALIDATION CONFIG OBJECT
 export const validationConfig = {
-  formSelector: '.popup__form',
   inputSelector: '.popup__form-input',
   submitButtonSelector: '.popup__form-btn-submit',
-  inactiveButtonClass: 'popup__form-btn-submit_inactive',
   inputErrorClass: 'popup__form-input_type_error',
   errorClass: 'popup__form-input-error_active'
 };
