@@ -1,27 +1,26 @@
 // CARD CLASS
 export class Card {
-  constructor(initialCards, templateSelector, handleImagePopup) {
+  constructor(initialCards, templateSelector, handleOpenImagePopup) {
     this._name = initialCards.name;
     this._link = initialCards.link;
     this._templateSelector = templateSelector;
-    this._handleImagePopup = handleImagePopup;
+    this._handleOpenImagePopup = handleOpenImagePopup;
   }
   // CARD EVENT LISTENERS
-  _setEventListeners(cardImageElement, cardLikeButtonElement, cardDeleteButtonElement, cardTitleElement) {
+  _setEventListeners(cardImageElement, cardLikeButtonElement, cardDeleteButtonElement) {
     cardImageElement.addEventListener('click', () => {
-      this._handleImagePopup(cardTitleElement, cardImageElement);
+      this._handleOpenImagePopup(this._name, this._link);
     });
     cardLikeButtonElement.addEventListener('click', () => {
       this._handleLikeButton(cardLikeButtonElement);
     });
     cardDeleteButtonElement.addEventListener('click', () => {
-      this._handleCardDelete(cardDeleteButtonElement);
+      this._handleCardDelete();
     });
   }
   // GET TEMPLATE FUNCTION
   _getTemplate() {
-    const cardTemplateElement = document.querySelector('.card-template').content.querySelector('.card');
-    const cardElement = cardTemplateElement.cloneNode(true);
+    const cardElement = this._templateSelector.content.querySelector('.card').cloneNode(true);
     return cardElement;
   }
   // GENERATE CARD FUNCTION
@@ -34,7 +33,7 @@ export class Card {
     cardTitleElement.textContent = this._name;
     cardImageElement.src = this._link;
     cardImageElement.alt = this._name;
-    this._setEventListeners(cardImageElement, cardLikeButtonElement, cardDeleteButtonElement, cardTitleElement);
+    this._setEventListeners(cardImageElement, cardLikeButtonElement, cardDeleteButtonElement);
     return this._element;
   }
   // CARD LIKE ADD/REMOVE FUNCTION
@@ -42,7 +41,7 @@ export class Card {
     cardLikeButtonElement.classList.toggle('card__btn-like_active');
   }
   // CARD DELETE FUNCTION
-  _handleCardDelete(cardDeleteButtonElement) {
-    cardDeleteButtonElement.closest('.card').remove();
+  _handleCardDelete() {
+    this._element.remove();
   }
 }

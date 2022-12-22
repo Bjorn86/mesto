@@ -1,4 +1,4 @@
-// IMPORT CONSTANTS
+// IMPORT ELEMENTS
 import {
   // IMPORT COMMON VARIABLES
   escapeButton,
@@ -29,7 +29,11 @@ import {
   // IMPORT CARDS VARIABLES
   cardsContainerElement,
   // IMPORT TEMPLATES VARIABLES
-  cardTemplateElement,
+  cardTemplateSelector,
+} from './elements.js';
+
+// IMPORT ARRAYS AND OBJECTS
+import {
   // IMPORT INITIAL CARDS ARRAY
   initialCards,
   // IMPORT VALIDATION CONFIG
@@ -41,34 +45,43 @@ import { Card } from './Card.js';
 import { FormValidator } from './FormValidator.js';
 
 // IMAGE POPUP FUNCTION
-const handleImagePopup = (cardTitleElement, cardImageElement) => {
-  imgPopupElement.src = cardImageElement.src;
-  imgPopupElement.alt = cardTitleElement.textContent;
-  captionImgPopupElement.textContent = cardTitleElement.textContent;
+const handleOpenImagePopup = (cardTitleElement, cardImageElement) => {
+  imgPopupElement.src = cardImageElement;
+  imgPopupElement.alt = cardTitleElement;
+  captionImgPopupElement.textContent = cardTitleElement;
   openPopup(popupImageElement);
+}
+
+// CARD CREATE FUNCTION
+const createCard = (item) => {
+  const card = new Card (item, cardTemplateSelector, handleOpenImagePopup);
+  const cardElement = card.generateCard();
+  return cardElement;
 }
 
 // ADDING INITIAL CARDS
 initialCards.forEach((item) => {
-  const card = new Card (item, cardTemplateElement, handleImagePopup);
-  const cardElement = card.generateCard();
-  cardsContainerElement.append(cardElement);
+  cardsContainerElement.append(createCard(item));
 });
 
 // ADDED CARD RENDER FUNCTION
 const handleAddedCardRender = (item) => {
-  const card = new Card (item, cardTemplateElement, handleImagePopup);
-  const cardElement = card.generateCard();
-  cardsContainerElement.prepend(cardElement);
+  cardsContainerElement.prepend(createCard(item));
 }
 
-// VALIDATION INITIATION FUNCTION
-const startFormValidation = (formSelector) => {
-  const form = new FormValidator (validationConfig, formSelector);
-  form.enableValidation(formSelector);
+// CREATE VALIDATION FUNCTION
+const createFormValidator = (formSelector) => {
+  const formValidator = new FormValidator (validationConfig, formSelector);
+  return formValidator;
 }
-startFormValidation(editProfileFormElement);
-startFormValidation(addCardFormElement);
+
+// INITIATING VALIDATION OF THE PROFILE EDITING FORM
+const editProfileFormValidator = createFormValidator(editProfileFormElement);
+editProfileFormValidator.enableValidation(editProfileFormElement);
+
+// INITIATION OF VALIDATION OF THE CARD ADDITION FORM
+const addCardFormValidator = createFormValidator(addCardFormElement);
+addCardFormValidator.enableValidation(addCardFormElement);
 
 // ADD CARD FORM SUBMIT FUNCTION
 const cardAdditionFormHandler = (evt) => {
@@ -96,16 +109,15 @@ const closePopup = (popup) => {
 
 // CLOSE POPUP BY CLICK ON OVERLAY FUNCTION
 const closePopupByClickOnOverlay = (evt) => {
-  const openModal = document.querySelector('.popup_opened');
   if (evt.target === evt.currentTarget) {
-    closePopup(openModal);
+    closePopup(evt.currentTarget);
   }
 }
 
 // CLOSE POPUP BY ESC BUTTON FUNCTION
 const closePopupByDownEscButton = (evt) => {
-  const openModal = document.querySelector('.popup_opened');
   if (evt.key === escapeButton) {
+    const openModal = document.querySelector('.popup_opened');
     closePopup(openModal);
   }
 }
@@ -127,9 +139,8 @@ const editProfileFormSubmitHandler = (evt) => {
 // OPEN POPUP EVENT LISTENERS
 profileEditButtonElement.addEventListener('click', () => {
   handleEditProfileDataSubstitution();
-  const form = new FormValidator (validationConfig, editProfileFormElement);
-  form.resetValidationsErrors(editProfileFormElement);
-  form.handleButtonCheckValidity(editProfileFormElement);
+  editProfileFormValidator.resetValidationsErrors();
+  editProfileFormValidator.handleButtonCheckValidity();
   openPopup(popupEditProfileElement);
 });
 addCardButtonElement.addEventListener('click', () => {
