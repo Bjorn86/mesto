@@ -20,7 +20,7 @@ export class Card {
   }
   // GET TEMPLATE FUNCTION
   _getTemplate() {
-    const cardElement = this._templateSelector.content.querySelector('.card').cloneNode(true);
+    const cardElement = document.querySelector(this._templateSelector).content.querySelector('.card').cloneNode(true);
     return cardElement;
   }
   // GENERATE CARD FUNCTION

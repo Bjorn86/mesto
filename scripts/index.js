@@ -28,8 +28,6 @@ import {
   addCardButtonElement,
   // IMPORT CARDS VARIABLES
   cardsContainerElement,
-  // IMPORT TEMPLATES VARIABLES
-  cardTemplateSelector,
 } from './elements.js';
 
 // IMPORT ARRAYS AND OBJECTS
@@ -54,7 +52,7 @@ const handleOpenImagePopup = (cardTitleElement, cardImageElement) => {
 
 // CARD CREATE FUNCTION
 const createCard = (item) => {
-  const card = new Card (item, cardTemplateSelector, handleOpenImagePopup);
+  const card = new Card (item, '.card-template', handleOpenImagePopup);
   const cardElement = card.generateCard();
   return cardElement;
 }
