@@ -33,4 +33,5 @@ export const profileEditButtonElement = profileElement.querySelector('.profile__
 export const addCardButtonElement = profileElement.querySelector('.profile__btn-add');
 
 //CARDS VARIABLES
-export const cardsContainerElement = document.querySelector('.cards__wrapper');
+export const cardTemplateSelector = '.card-template';
+export const cardsContainerSelector = '.cards__wrapper';

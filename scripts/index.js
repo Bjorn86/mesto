@@ -27,7 +27,8 @@ import {
   profileEditButtonElement,
   addCardButtonElement,
   // IMPORT CARDS VARIABLES
-  cardsContainerElement,
+  cardTemplateSelector,
+  cardsContainerSelector
 } from './elements.js';
 
 // IMPORT ARRAYS AND OBJECTS
@@ -39,10 +40,24 @@ import {
 } from './constants.js';
 
 // CLASS IMPORT
+import { Section } from './Section.js';
 import { Card } from './Card.js';
 import { FormValidator } from './FormValidator.js';
 
-// IMAGE POPUP FUNCTION
+
+const cardList = new Section({
+  items: initialCards,
+  renderer: (item) => {
+    const card = new Card (item, cardTemplateSelector);
+    const cardElement = card.generateCard();
+    cardList.addItem(cardElement);
+  }
+}, cardsContainerSelector);
+
+cardList.renderItems();
+
+
+/* // IMAGE POPUP FUNCTION
 const handleOpenImagePopup = (cardTitleElement, cardImageElement) => {
   imgPopupElement.src = cardImageElement;
   imgPopupElement.alt = cardTitleElement;
@@ -65,7 +80,7 @@ initialCards.forEach((item) => {
 // ADDED CARD RENDER FUNCTION
 const handleAddedCardRender = (item) => {
   cardsContainerElement.prepend(createCard(item));
-}
+} */
 
 // CREATE VALIDATION FUNCTION
 const createFormValidator = (formSelector) => {
