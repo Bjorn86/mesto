@@ -23,7 +23,7 @@
             <h1 class="profile__user-name">Жак-Ив Кусто</h1>
             <button type="button" class="profile__btn-edit"></button>
           </div>
-          <p class="profile__user-descr">Исследователь океана</p>
+          <p class="profile__user-job">Исследователь океана</p>
         </div>
       </div>
       <button type="button" class="profile__btn-add"></button>
@@ -38,14 +38,14 @@
   <div class="popup popup_type_edit-profile">
     <div class="popup__form-container">
       <h2 class="popup__title">Редактировать профиль</h2>
-      <button type="button" class="popup__btn-close popup__btn-close_place_edit-profile"></button>
+      <button type="button" class="popup__btn-close"></button>
       <form action="#" name="edit-profile" id="edit-profile" class="popup__form popup__form_type_edit-profile" novalidate>
         <label class="popup__input-wrapper">
-          <input type="text" name="name" form="edit-profile" required placeholder="Введите ваше имя" minlength="2" maxlength="40" class="popup__form-input popup__form-input_substitution_name" id="name-input" autofocus>
+          <input type="text" name="name" form="edit-profile" required placeholder="Введите ваше имя" minlength="2" maxlength="40" class="popup__form-input popup__form-input_substitution_name" id="name-input">
           <span class="name-input-error popup__form-input-error"></span>
         </label>
         <label class="popup__input-wrapper">
-          <input type="text" name="description" form="edit-profile" required placeholder="Опишите кто вы" minlength="2" maxlength="200" class="popup__form-input popup__form-input_substitution_job" id="job-input">
+          <input type="text" name="job" form="edit-profile" required placeholder="Опишите кто вы" minlength="2" maxlength="200" class="popup__form-input popup__form-input_substitution_job" id="job-input">
           <span class="job-input-error popup__form-input-error"></span>
         </label>
         <button type="submit" form="edit-profile" class="popup__form-btn-submit">Сохранить</button>
@@ -55,14 +55,14 @@
   <div class="popup popup_type_add-card">
     <div class="popup__form-container">
       <h2 class="popup__title">Новое место</h2>
-      <button type="button" class="popup__btn-close popup__btn-close_place_add-card"></button>
+      <button type="button" class="popup__btn-close"></button>
       <form action="#" name="add-card" id="add-card" class="popup__form popup__form_type_add-card" novalidate>
         <label class="popup__input-wrapper">
-          <input type="text" name="place-name" form="add-card" required placeholder="Название" minlength="2" maxlength="30" class="popup__form-input popup__form-input_substitution_place-name" id="place-input">
+          <input type="text" name="name" form="add-card" required placeholder="Название" minlength="2" maxlength="30" class="popup__form-input popup__form-input_substitution_place-name" id="place-input">
           <span class="place-input-error popup__form-input-error"></span>
         </label>
         <label class="popup__input-wrapper">
-          <input type="url" name="link-img" form="add-card" required placeholder="Ссылка на картинку" class="popup__form-input popup__form-input_substitution_link-img" id="link-input">
+          <input type="url" name="link" form="add-card" required placeholder="Ссылка на картинку" class="popup__form-input popup__form-input_substitution_link-img" id="link-input">
           <span class="link-input-error popup__form-input-error"></span>
         </label>
         <button type="submit" form="add-card" class="popup__form-btn-submit">Создать</button>
@@ -71,7 +71,7 @@
   </div>
   <div class="popup popup_type_img popup_theme_darker">
     <div class="popup__img-container">
-      <button type="button" class="popup__btn-close popup__btn-close_place_img"></button>
+      <button type="button" class="popup__btn-close"></button>
       <figure class="popup__figure-wrapper">
         <img src="#" alt="Описание изображения" class="popup__img">
         <figcaption class="popup__img-caption"></figcaption>

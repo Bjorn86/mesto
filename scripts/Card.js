@@ -1,15 +1,15 @@
 // CARD CLASS
 export class Card {
-  constructor(initialCards, templateSelector, handleOpenImagePopup) {
+  constructor(initialCards, templateSelector, handleCardClick) {
     this._name = initialCards.name;
     this._link = initialCards.link;
     this._templateSelector = templateSelector;
-    this._handleOpenImagePopup = handleOpenImagePopup;
+    this._handleCardClick = handleCardClick;
   }
   // CARD EVENT LISTENERS
   _setEventListeners(cardImageElement, cardLikeButtonElement, cardDeleteButtonElement) {
     cardImageElement.addEventListener('click', () => {
-      this._handleOpenImagePopup(this._name, this._link);
+      this._handleCardClick(this._name, this._link);
     });
     cardLikeButtonElement.addEventListener('click', () => {
       this._handleLikeButton(cardLikeButtonElement);
@@ -18,12 +18,12 @@ export class Card {
       this._handleCardDelete();
     });
   }
-  // GET TEMPLATE FUNCTION
+  // GET TEMPLATE METHOD
   _getTemplate() {
     const cardElement = document.querySelector(this._templateSelector).content.querySelector('.card').cloneNode(true);
     return cardElement;
   }
-  // GENERATE CARD FUNCTION
+  // GENERATE CARD METHOD
   generateCard() {
     this._element = this._getTemplate();
     const cardImageElement = this._element.querySelector('.card__img');
@@ -36,11 +36,11 @@ export class Card {
     this._setEventListeners(cardImageElement, cardLikeButtonElement, cardDeleteButtonElement);
     return this._element;
   }
-  // CARD LIKE ADD/REMOVE FUNCTION
+  // CARD LIKE ADD/REMOVE METHOD
   _handleLikeButton(cardLikeButtonElement) {
     cardLikeButtonElement.classList.toggle('card__btn-like_active');
   }
-  // CARD DELETE FUNCTION
+  // CARD DELETE METHOD
   _handleCardDelete() {
     this._element.remove();
   }

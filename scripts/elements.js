@@ -1,37 +1,25 @@
 //COMMON VARIABLES
 export const escapeButton = 'Escape';
 
-//COMMON POPUP VARIABLES
-export const popupElements = document.querySelectorAll('.popup');
-export const popupEditProfileElement = document.querySelector('.popup_type_edit-profile');
-export const popupAddCardElement = document.querySelector('.popup_type_add-card');
-export const popupImageElement = document.querySelector('.popup_type_img');
-export const popupCloseButtonEditProfileElement = popupEditProfileElement.querySelector('.popup__btn-close_place_edit-profile');
-export const popupCloseButtonAddCardElement = popupAddCardElement.querySelector('.popup__btn-close_place_add-card');
-export const popupCloseButtonImageElement = popupImageElement.querySelector('.popup__btn-close_place_img');
-
 //EDIT PROFILE POPUP VARIABLES
+export const editProfilePopupSelector = '.popup_type_edit-profile';
 export const editProfileFormElement = document.querySelector('.popup__form_type_edit-profile');
 export const nameInputElement = editProfileFormElement.querySelector('.popup__form-input_substitution_name');
 export const jobInputElement = editProfileFormElement.querySelector('.popup__form-input_substitution_job');
 
 //ADD CARD POPUP VARIABLES
+export const addCardPopupSelector = '.popup_type_add-card';
 export const addCardFormElement = document.querySelector('.popup__form_type_add-card');
-export const placeNameInputElement = addCardFormElement.querySelector('.popup__form-input_substitution_place-name');
-export const linkImageInputElement = addCardFormElement.querySelector('.popup__form-input_substitution_link-img');
 
 //IMAGE POPUP VARIABLES
-export const imgContainerPopupElement = document.querySelector('.popup__img-container');
-export const imgPopupElement = imgContainerPopupElement.querySelector('.popup__img');
-export const captionImgPopupElement = imgContainerPopupElement.querySelector('.popup__img-caption');
+export const imagePopupSelector = '.popup_type_img';
 
 //PROFILE VARIABLES
 export const profileElement = document.querySelector('.profile');
-export const profileNameElement = profileElement.querySelector('.profile__user-name');
-export const profileJobElement = profileElement.querySelector('.profile__user-descr');
 export const profileEditButtonElement = profileElement.querySelector('.profile__btn-edit');
 export const addCardButtonElement = profileElement.querySelector('.profile__btn-add');
 
 //CARDS VARIABLES
 export const cardTemplateSelector = '.card-template';
 export const cardsContainerSelector = '.cards__wrapper';
+export const cardsContainerElement = document.querySelector('.cards__wrapper');
