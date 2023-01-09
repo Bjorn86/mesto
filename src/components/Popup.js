@@ -1,5 +1,5 @@
 // IMPORT ELEMENTS
-import { escapeButton } from './elements.js';
+import { escapeButton } from '../utils/elements.js';
 
 // POPUP CLASS
 export class Popup {

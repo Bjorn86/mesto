@@ -1,10 +1,10 @@
 // VALIDATION CLASS
 export class FormValidator {
-  constructor(validationConfig, form) {
-    this._form = form;
+  constructor(validationConfig, formElement) {
+    this._formElement = formElement;
     this._inputSelector = validationConfig.inputSelector;
-    this._inputList = [...this._form.querySelectorAll(this._inputSelector)];
-    this._submitButtonElement = this._form.querySelector(validationConfig.submitButtonSelector);
+    this._inputList = [...this._formElement.querySelectorAll(this._inputSelector)];
+    this._submitButtonElement = this._formElement.querySelector(validationConfig.submitButtonSelector);
     this._inputErrorClass = validationConfig.inputErrorClass;
     this._errorClass = validationConfig.errorClass;
   }
@@ -17,7 +17,7 @@ export class FormValidator {
         this._toggleButtonState();
       });
     });
-    this._form.addEventListener('reset', () => {this._submitButtonElement.disabled = true});
+    this._formElement.addEventListener('reset', () => {this._submitButtonElement.disabled = true});
   }
   // TOGGLE BUTTON ACTIVE/DISABLED FUNCTION
   _toggleButtonState() {
@@ -39,13 +39,13 @@ export class FormValidator {
   }
   // ERRORS SHOW/HIDE FUNCTIONS
   _hideError(input) {
-    const errorElement = this._form.querySelector(`.${input.id}-error`);
+    const errorElement = this._formElement.querySelector(`.${input.id}-error`);
     input.classList.remove(this._inputErrorClass);
     errorElement.classList.remove(this._errorClass);
     errorElement.textContent = '';
   }
   _showError(input, errorMessage) {
-    const errorElement = this._form.querySelector(`.${input.id}-error`);
+    const errorElement = this._formElement.querySelector(`.${input.id}-error`);
     input.classList.add(this._inputErrorClass);
     errorElement.textContent = errorMessage;
     errorElement.classList.add(this._errorClass);

@@ -1,28 +1,36 @@
+// IMPORT IMAGES
+import baikalImage from '../images/baikal.jpg';
+import kareliyaImage from '../images/kareliya.jpg';
+import kazanImage from '../images/kazan.jpg';
+import krasnayaPolyanaImage from '../images/krasnaya-polyana.jpg';
+import krasnoyarskStolbiImage from '../images/krasnoyarsk-stolbi.jpg';
+import sheregeshImage from '../images/sheregesh.jpg';
+
 //INITIAL CARDS ARRAY
 export const initialCards = [
   {
     name: 'Озеро Байкал',
-    link: './images/baikal.jpg'
+    link: baikalImage
   },
   {
     name: 'Карелия',
-    link: './images/kareliya.jpg'
+    link: kareliyaImage
   },
   {
     name: 'Казань',
-    link: './images/kazan.jpg'
+    link: kazanImage
   },
   {
     name: 'Красная поляна',
-    link: './images/krasnaya-polyana.jpg'
+    link: krasnayaPolyanaImage
   },
   {
     name: 'Красноярские столбы',
-    link: './images/krasnoyarsk-stolbi.jpg'
+    link: krasnoyarskStolbiImage
   },
   {
     name: 'Шерегеш',
-    link: './images/sheregesh.jpg'
+    link: sheregeshImage
   }
 ];
 

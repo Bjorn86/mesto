@@ -8,7 +8,6 @@
   <meta name="keywords" content="Блог, место, путешествия, отдых, отпуск">
   <meta name="author" content="Данила Легкобытов">
   <title>Место</title>
-  <link rel="stylesheet" href="./pages/index.css">
 </head>
 <body class="page">
   <header class="header">
@@ -17,7 +16,7 @@
   <main class="content">
     <section class="profile">
       <div class="profile__wrapper">
-        <img src="./images/profile-avatar.jpg" alt="Фотография Жака-Ива Кусто" class="profile__avatar">
+        <img src="<%=require('./images/profile-avatar.jpg')%>" alt="Фотография Жака-Ива Кусто" class="profile__avatar">
         <div class="profile__user-wrapper">
           <div class="profile__user-edit">
             <h1 class="profile__user-name">Жак-Ив Кусто</h1>
@@ -88,6 +87,5 @@
       </div>
     </li>
   </template>
-  <script src="./scripts/index.js" type="module"></script>
 </body>
 </html>

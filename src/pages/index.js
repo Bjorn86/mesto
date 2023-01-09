@@ -1,10 +1,11 @@
+// IMPORT CSS FILE
+import './index.css';
+
 // IMPORT ELEMENTS
 import {
   // IMPORT EDIT PROFILE POPUP VARIABLES
   editProfilePopupSelector,
   editProfileFormElement,
-  nameInputElement,
-  jobInputElement,
   // IMPORT ADD CARD POPUP VARIABLES
   addCardPopupSelector,
   addCardFormElement,
@@ -15,9 +16,8 @@ import {
   addCardButtonElement,
   // IMPORT CARDS VARIABLES
   cardTemplateSelector,
-  cardsContainerSelector,
-  cardsContainerElement
-} from './elements.js';
+  cardsContainerSelector
+} from '../utils/elements.js';
 
 // IMPORT ARRAYS AND OBJECTS
 import {
@@ -25,15 +25,21 @@ import {
   initialCards,
   // IMPORT VALIDATION CONFIG
   validationConfig
-} from './constants.js';
+} from '../utils/constants.js';
+
+import {
+  handleCardClick,
+  handleAddedCardRender,
+  handleEditProfileDataSubstitution
+} from '../utils/utils.js';
 
 // CLASS IMPORT
-import { Section } from './Section.js';
-import { Card } from './Card.js';
-import { FormValidator } from './FormValidator.js';
-import { PopupWithImage } from './PopupWithImage.js';
-import { PopupWithForm } from './PopupWithForm.js';
-import { UserInfo } from './UserInfo.js';
+import { Section } from '../components/Section.js';
+import { Card } from '../components/Card.js';
+import { FormValidator } from '../components/FormValidator.js';
+import { PopupWithImage } from '../components/PopupWithImage.js';
+import { PopupWithForm } from '../components/PopupWithForm.js';
+import { UserInfo } from '../components/UserInfo.js';
 
 // CREATE USER INFO CLASS INSTANCE
 const userInfo = new UserInfo({
@@ -42,13 +48,9 @@ const userInfo = new UserInfo({
 });
 
 // CREATE POPUP WITH IMAGE CLASS INSTANCE
-const popupWithImage = new PopupWithImage(imagePopupSelector);
+export const popupWithImage = new PopupWithImage(imagePopupSelector);
 popupWithImage.setEventListeners();
 
-// HANDLE CLICK CARD IMAGE
-const handleCardClick = (cardTitleElement, cardImageElement) => {
-  popupWithImage.open(cardTitleElement, cardImageElement);
-}
 
 // CREATE POPUP WITH EDIT PROFILE FORM CLASS INSTANCE
 const editProfilePopup = new PopupWithForm({
@@ -82,36 +84,25 @@ const cardList = new Section({
 cardList.renderItems();
 
 // CARD CREATE FUNCTION
-const createCard = (item) => {
+export const createCard = (item) => {
   const card = new Card (item, cardTemplateSelector, handleCardClick);
   const cardElement = card.generateCard();
   return cardElement;
 }
 
-// ADDED CARD RENDER FUNCTION
-const handleAddedCardRender = (item) => {
-  cardsContainerElement.prepend(createCard(item));
-}
-
 // CREATE VALIDATION FUNCTION
-const createFormValidator = (formSelector) => {
-  const formValidator = new FormValidator (validationConfig, formSelector);
+const createFormValidator = (formElement) => {
+  const formValidator = new FormValidator (validationConfig, formElement);
   return formValidator;
 }
 
 // INITIATING VALIDATION OF THE PROFILE EDITING FORM
-const editProfileFormValidator = createFormValidator(editProfileFormElement);
+const editProfileFormValidator = createFormValidator(editProfileFormElement); //Проверить прошлую ПР не селектор ли должен передаваться?
 editProfileFormValidator.enableValidation(editProfileFormElement);
 
 // INITIATION OF VALIDATION OF THE CARD ADDITION FORM
 const addCardFormValidator = createFormValidator(addCardFormElement);
 addCardFormValidator.enableValidation(addCardFormElement);
-
-// EDIT PROFILE DATA SUBSTITUTION FUNCTION
-const handleEditProfileDataSubstitution = (userData) => {
-  nameInputElement.value = userData.name;
-  jobInputElement.value = userData.job;
-}
 
 // OPEN POPUP EVENT LISTENERS
 profileEditButtonElement.addEventListener('click', () => {
