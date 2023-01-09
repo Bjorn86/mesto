@@ -48,40 +48,27 @@ const userInfo = new UserInfo({
 });
 
 // CREATE POPUP WITH IMAGE CLASS INSTANCE
-export const popupWithImage = new PopupWithImage(imagePopupSelector);
+export const popupWithImage = new PopupWithImage(imagePopupSelector); //Данная переменная используется в utils.js, в функции обработчика клика по изображению handleCardClick
 popupWithImage.setEventListeners();
 
 
 // CREATE POPUP WITH EDIT PROFILE FORM CLASS INSTANCE
-const editProfilePopup = new PopupWithForm({
+const popupEditProfile = new PopupWithForm({
   handleFormSubmit: (userData) => {
     userInfo.setUserInfo(userData);
-    editProfilePopup.close();
+    popupEditProfile.close();
   }
 }, editProfilePopupSelector);
-editProfilePopup.setEventListeners();
+popupEditProfile.setEventListeners();
 
 // CREATE POPUP WITH ADD CARD FORM CLASS INSTANCE
-const addCardPopup = new PopupWithForm({
+const popupAddCard = new PopupWithForm({
   handleFormSubmit: (placeData) => {
     handleAddedCardRender(placeData);
-    addCardPopup.close();
+    popupAddCard.close();
   }
 }, addCardPopupSelector);
-addCardPopup.setEventListeners();
-
-// CREATING AN CLASS INSTANCE WITH INITIAL CARDS
-const cardList = new Section({
-  items: initialCards,
-  renderer: (item) => {
-    const card = new Card (item, cardTemplateSelector, handleCardClick);
-    const cardElement = card.generateCard();
-    cardList.addItem(cardElement);
-  }
-}, cardsContainerSelector);
-
-// INITIAL CARDS RENDER
-cardList.renderItems();
+popupAddCard.setEventListeners();
 
 // CARD CREATE FUNCTION
 export const createCard = (item) => {
@@ -90,6 +77,17 @@ export const createCard = (item) => {
   return cardElement;
 }
 
+// CREATING AN CLASS INSTANCE WITH INITIAL CARDS
+const cardList = new Section({
+  items: initialCards,
+  renderer: (item) => {
+    cardList.addItem(createCard(item));
+  }
+}, cardsContainerSelector);
+
+// INITIAL CARDS RENDER
+cardList.renderItems();
+
 // CREATE VALIDATION FUNCTION
 const createFormValidator = (formElement) => {
   const formValidator = new FormValidator (validationConfig, formElement);
@@ -97,7 +95,7 @@ const createFormValidator = (formElement) => {
 }
 
 // INITIATING VALIDATION OF THE PROFILE EDITING FORM
-const editProfileFormValidator = createFormValidator(editProfileFormElement); //Проверить прошлую ПР не селектор ли должен передаваться?
+const editProfileFormValidator = createFormValidator(editProfileFormElement);
 editProfileFormValidator.enableValidation(editProfileFormElement);
 
 // INITIATION OF VALIDATION OF THE CARD ADDITION FORM
@@ -110,8 +108,9 @@ profileEditButtonElement.addEventListener('click', () => {
   handleEditProfileDataSubstitution(userData);
   editProfileFormValidator.resetValidationsErrors();
   editProfileFormValidator.handleButtonCheckValidity();
-  editProfilePopup.open();
+  popupEditProfile.open();
 });
 addCardButtonElement.addEventListener('click', () => {
-  addCardPopup.open();
+  addCardFormValidator.resetValidationsErrors();
+  popupAddCard.open();
 });
