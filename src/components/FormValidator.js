@@ -28,7 +28,7 @@ export class FormValidator {
   // CHECK INPUT VALIDITY FUNCTION
   _checkInputValidity(input) {
     !input.validity.valid
-      ? this._showError(input, input.validationMessage)
+      ? this._showError(input)
       : this._hideError(input)
   }
   // INVALID INPUT CHECK FUNCTION
@@ -44,23 +44,20 @@ export class FormValidator {
     errorElement.classList.remove(this._errorClass);
     errorElement.textContent = '';
   }
-  _showError(input, errorMessage) {
+  _showError(input) {
     const errorElement = this._formElement.querySelector(`.${input.id}-error`);
     input.classList.add(this._inputErrorClass);
-    errorElement.textContent = errorMessage;
+    errorElement.textContent = input.validationMessage;
     errorElement.classList.add(this._errorClass);
   }
   // RESET VALIDATION ERRORS FUNCTION
   resetValidationsErrors = () => {
+    this._toggleButtonState();
     this._inputList.forEach((input) => {
       if (input.classList.contains(this._inputErrorClass)) {
         this._hideError(input);
       }
     })
-  }
-  // CHECK BUTTON VALIDITY FUNCTION
-  handleButtonCheckValidity = () => {
-    this._toggleButtonState();
   }
   // ENABLE VALIDATION FUNCTION
   enableValidation() {

@@ -5,16 +5,21 @@ export class Card {
     this._link = initialCards.link;
     this._templateSelector = templateSelector;
     this._handleCardClick = handleCardClick;
+    this._element = this._getTemplate();
+    this._cardImageElement = this._element.querySelector('.card__img');
+    this._cardLikeButtonElement = this._element.querySelector('.card__btn-like');
+    this._cardDeleteButtonElement = this._element.querySelector('.card__btn-del');
+    this._cardTitleElement = this._element.querySelector('.card__title');
   }
   // CARD EVENT LISTENERS
-  _setEventListeners(cardImageElement, cardLikeButtonElement, cardDeleteButtonElement) {
-    cardImageElement.addEventListener('click', () => {
+  _setEventListeners() {
+    this._cardImageElement.addEventListener('click', () => {
       this._handleCardClick(this._name, this._link);
     });
-    cardLikeButtonElement.addEventListener('click', () => {
-      this._handleLikeButton(cardLikeButtonElement);
+    this._cardLikeButtonElement.addEventListener('click', () => {
+      this._handleLikeButton();
     });
-    cardDeleteButtonElement.addEventListener('click', () => {
+    this._cardDeleteButtonElement.addEventListener('click', () => {
       this._handleCardDelete();
     });
   }
@@ -25,20 +30,15 @@ export class Card {
   }
   // GENERATE CARD METHOD
   generateCard() {
-    this._element = this._getTemplate();
-    const cardImageElement = this._element.querySelector('.card__img');
-    const cardLikeButtonElement = this._element.querySelector('.card__btn-like');
-    const cardDeleteButtonElement = this._element.querySelector('.card__btn-del');
-    const cardTitleElement = this._element.querySelector('.card__title');
-    cardTitleElement.textContent = this._name;
-    cardImageElement.src = this._link;
-    cardImageElement.alt = this._name;
-    this._setEventListeners(cardImageElement, cardLikeButtonElement, cardDeleteButtonElement);
+    this._cardTitleElement.textContent = this._name;
+    this._cardImageElement.src = this._link;
+    this._cardImageElement.alt = this._name;
+    this._setEventListeners();
     return this._element;
   }
   // CARD LIKE ADD/REMOVE METHOD
-  _handleLikeButton(cardLikeButtonElement) {
-    cardLikeButtonElement.classList.toggle('card__btn-like_active');
+  _handleLikeButton() {
+    this._cardLikeButtonElement.classList.toggle('card__btn-like_active');
   }
   // CARD DELETE METHOD
   _handleCardDelete() {

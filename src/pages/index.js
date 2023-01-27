@@ -29,7 +29,6 @@ import {
 
 import {
   handleCardClick,
-  handleAddedCardRender,
   handleEditProfileDataSubstitution
 } from '../utils/utils.js';
 
@@ -51,7 +50,6 @@ const userInfo = new UserInfo({
 export const popupWithImage = new PopupWithImage(imagePopupSelector);
 popupWithImage.setEventListeners();
 
-
 // CREATE POPUP WITH EDIT PROFILE FORM CLASS INSTANCE
 const editProfilePopup = new PopupWithForm({
   handleFormSubmit: (userData) => {
@@ -64,31 +62,30 @@ editProfilePopup.setEventListeners();
 // CREATE POPUP WITH ADD CARD FORM CLASS INSTANCE
 const addCardPopup = new PopupWithForm({
   handleFormSubmit: (placeData) => {
-    handleAddedCardRender(placeData);
+    const newCard = createCard(placeData);
+    cardList.addItem(newCard);
     addCardPopup.close();
   }
 }, addCardPopupSelector);
 addCardPopup.setEventListeners();
 
-// CREATING AN CLASS INSTANCE WITH INITIAL CARDS
+// CARD CREATE FUNCTION
+const createCard = (item) => {
+  const card = new Card (item, cardTemplateSelector, handleCardClick);
+  const cardElement = card.generateCard();
+  return cardElement;
+}
+
+// CREATING AN CLASS INSTANCE WITH CARDS
 const cardList = new Section({
   items: initialCards,
   renderer: (item) => {
-    const card = new Card (item, cardTemplateSelector, handleCardClick);
-    const cardElement = card.generateCard();
-    cardList.addItem(cardElement);
+    cardList.addItem(createCard(item));
   }
 }, cardsContainerSelector);
 
 // INITIAL CARDS RENDER
 cardList.renderItems();
-
-// CARD CREATE FUNCTION
-export const createCard = (item) => {
-  const card = new Card (item, cardTemplateSelector, handleCardClick);
-  const cardElement = card.generateCard();
-  return cardElement;
-}
 
 // CREATE VALIDATION FUNCTION
 const createFormValidator = (formElement) => {
@@ -109,9 +106,9 @@ profileEditButtonElement.addEventListener('click', () => {
   const userData = userInfo.getUserInfo();
   handleEditProfileDataSubstitution(userData);
   editProfileFormValidator.resetValidationsErrors();
-  editProfileFormValidator.handleButtonCheckValidity();
   editProfilePopup.open();
 });
 addCardButtonElement.addEventListener('click', () => {
+  addCardFormValidator.resetValidationsErrors();
   addCardPopup.open();
 });
