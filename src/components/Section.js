@@ -11,6 +11,6 @@ export class Section {
   }
   // ADD ITEM IN DOM METHOD
   addItem(element) {
-    this._container.append(element);
+    this._container.prepend(element);
   }
 }

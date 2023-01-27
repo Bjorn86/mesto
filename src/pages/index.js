@@ -29,7 +29,6 @@ import {
 
 import {
   handleCardClick,
-  handleAddedCardRender,
   handleEditProfileDataSubstitution
 } from '../utils/utils.js';
 
@@ -48,9 +47,8 @@ const userInfo = new UserInfo({
 });
 
 // CREATE POPUP WITH IMAGE CLASS INSTANCE
-export const popupWithImage = new PopupWithImage(imagePopupSelector); //Данная переменная используется в utils.js, в функции обработчика клика по изображению handleCardClick
+export const popupWithImage = new PopupWithImage(imagePopupSelector);
 popupWithImage.setEventListeners();
-
 
 // CREATE POPUP WITH EDIT PROFILE FORM CLASS INSTANCE
 const popupEditProfile = new PopupWithForm({
@@ -64,20 +62,21 @@ popupEditProfile.setEventListeners();
 // CREATE POPUP WITH ADD CARD FORM CLASS INSTANCE
 const popupAddCard = new PopupWithForm({
   handleFormSubmit: (placeData) => {
-    handleAddedCardRender(placeData);
+    const newCard = createCard(placeData);
+    cardList.addItem(newCard);
     popupAddCard.close();
   }
 }, addCardPopupSelector);
 popupAddCard.setEventListeners();
 
 // CARD CREATE FUNCTION
-export const createCard = (item) => {
+const createCard = (item) => {
   const card = new Card (item, cardTemplateSelector, handleCardClick);
   const cardElement = card.generateCard();
   return cardElement;
 }
 
-// CREATING AN CLASS INSTANCE WITH INITIAL CARDS
+// CREATING AN CLASS INSTANCE WITH CARDS
 const cardList = new Section({
   items: initialCards,
   renderer: (item) => {
@@ -107,7 +106,6 @@ profileEditButtonElement.addEventListener('click', () => {
   const userData = userInfo.getUserInfo();
   handleEditProfileDataSubstitution(userData);
   editProfileFormValidator.resetValidationsErrors();
-  editProfileFormValidator.handleButtonCheckValidity();
   popupEditProfile.open();
 });
 addCardButtonElement.addEventListener('click', () => {

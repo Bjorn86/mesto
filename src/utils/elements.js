@@ -1,5 +1,5 @@
 //COMMON VARIABLES
-export const escapeButton = 'Escape';
+export const ESCAPE_BUTTON = 'Escape';
 
 //EDIT PROFILE POPUP VARIABLES
 export const editProfilePopupSelector = '.popup_type_edit-profile';
