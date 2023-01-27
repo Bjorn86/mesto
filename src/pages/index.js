@@ -51,23 +51,23 @@ export const popupWithImage = new PopupWithImage(imagePopupSelector);
 popupWithImage.setEventListeners();
 
 // CREATE POPUP WITH EDIT PROFILE FORM CLASS INSTANCE
-const editProfilePopup = new PopupWithForm({
+const popupEditProfile = new PopupWithForm({
   handleFormSubmit: (userData) => {
     userInfo.setUserInfo(userData);
-    editProfilePopup.close();
+    popupEditProfile.close();
   }
 }, editProfilePopupSelector);
-editProfilePopup.setEventListeners();
+popupEditProfile.setEventListeners();
 
 // CREATE POPUP WITH ADD CARD FORM CLASS INSTANCE
-const addCardPopup = new PopupWithForm({
+const popupAddCard = new PopupWithForm({
   handleFormSubmit: (placeData) => {
     const newCard = createCard(placeData);
     cardList.addItem(newCard);
-    addCardPopup.close();
+    popupAddCard.close();
   }
 }, addCardPopupSelector);
-addCardPopup.setEventListeners();
+popupAddCard.setEventListeners();
 
 // CARD CREATE FUNCTION
 const createCard = (item) => {
@@ -106,9 +106,9 @@ profileEditButtonElement.addEventListener('click', () => {
   const userData = userInfo.getUserInfo();
   handleEditProfileDataSubstitution(userData);
   editProfileFormValidator.resetValidationsErrors();
-  editProfilePopup.open();
+  popupEditProfile.open();
 });
 addCardButtonElement.addEventListener('click', () => {
   addCardFormValidator.resetValidationsErrors();
-  addCardPopup.open();
+  popupAddCard.open();
 });
