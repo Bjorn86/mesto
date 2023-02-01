@@ -9,14 +9,21 @@ import {
   // IMPORT ADD CARD POPUP VARIABLES
   addCardPopupSelector,
   addCardFormElement,
+  // IMPORT EDIT AVATAR POPUP VARIABLES
+  editAvatarPopupSelector,
+  editAvatarPopupElement,
+  // IMPORT CARD DELETE POPUP VARIABLES
+  deleteCardPopupSelector,
   // IMPORT IMAGE POPUP VARIABLES
   imagePopupSelector,
   // IMPORT PROFILE VARIABLES
   profileEditButtonElement,
   addCardButtonElement,
+  editProfileButtonElement,
   // IMPORT CARDS VARIABLES
   cardTemplateSelector,
-  cardsContainerSelector
+  cardsContainerSelector,
+  cardDeleteElement
 } from '../utils/elements.js';
 
 // IMPORT ARRAYS AND OBJECTS
@@ -38,6 +45,7 @@ import { Card } from '../components/Card.js';
 import { FormValidator } from '../components/FormValidator.js';
 import { PopupWithImage } from '../components/PopupWithImage.js';
 import { PopupWithForm } from '../components/PopupWithForm.js';
+import { PopupWithConfirmation } from '../components/PopupWithConfirmation';
 import { UserInfo } from '../components/UserInfo.js';
 
 // CREATE USER INFO CLASS INSTANCE
@@ -68,6 +76,22 @@ const popupAddCard = new PopupWithForm({
   }
 }, addCardPopupSelector);
 popupAddCard.setEventListeners();
+
+// CREATE POPUP WITH AVATAR EDIT FORM CLASS INSTANCE
+const popupEditAvatar = new PopupWithForm({
+  handleFormSubmit: () => {
+    popupEditAvatar.close()
+  }
+}, editAvatarPopupSelector);
+popupEditAvatar.setEventListeners();
+
+// CREATE POPUP WITH DELETE CARD FORM CLASS INSTANCE
+const popupDeleteCard = new PopupWithConfirmation({
+  handleFormSubmit: () => {
+    popupDeleteCard.close()
+  }
+}, deleteCardPopupSelector);
+popupDeleteCard.setEventListeners();
 
 // CARD CREATE FUNCTION
 const createCard = (item) => {
@@ -101,6 +125,10 @@ editProfileFormValidator.enableValidation(editProfileFormElement);
 const addCardFormValidator = createFormValidator(addCardFormElement);
 addCardFormValidator.enableValidation(addCardFormElement);
 
+// INITIATING VALIDATION OF THE PROFILE EDITING FORM
+const editAvatarFormValidator = createFormValidator(editAvatarPopupElement);
+editAvatarFormValidator.enableValidation()
+
 // OPEN POPUP EVENT LISTENERS
 profileEditButtonElement.addEventListener('click', () => {
   const userData = userInfo.getUserInfo();
@@ -112,3 +140,10 @@ addCardButtonElement.addEventListener('click', () => {
   addCardFormValidator.resetValidationsErrors();
   popupAddCard.open();
 });
+editProfileButtonElement.addEventListener('click', () => {
+  editAvatarFormValidator.resetValidationsErrors();
+  popupEditAvatar.open();
+});
+/* cardDeleteElement.addEventListener('click', () => {
+  popupDeleteCard.open();
+}) */

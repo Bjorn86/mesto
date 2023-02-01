@@ -43,5 +43,6 @@ export class Card {
   // CARD DELETE METHOD
   _handleCardDelete() {
     this._element.remove();
+    this._element = null;
   }
 }

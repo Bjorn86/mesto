@@ -19,11 +19,13 @@
     <main class="content">
       <section class="profile">
         <div class="profile__wrapper">
-          <img
-            src="<%=require('./images/profile-avatar.jpg')%>"
-            alt="Фотография Жака-Ива Кусто"
-            class="profile__avatar"
-          />
+          <button class="profile__btn-avatar-edit">
+            <img
+              src="<%=require('./images/profile-avatar.jpg')%>"
+              alt="Аватар пользователя"
+              class="profile__avatar"
+            />
+          </button>
           <div class="profile__user-wrapper">
             <div class="profile__user-edit">
               <h1 class="profile__user-name">Жак-Ив Кусто</h1>
@@ -42,7 +44,7 @@
       <p class="footer__copyright">&copy; 2022 Данила Легкобытов</p>
     </footer>
     <div class="popup popup_type_edit-profile">
-      <div class="popup__form-container">
+      <div class="popup__item-container">
         <h2 class="popup__title">Редактировать профиль</h2>
         <button type="button" class="popup__btn-close"></button>
         <form
@@ -83,7 +85,7 @@
           <button
             type="submit"
             form="edit-profile"
-            class="popup__form-btn-submit"
+            class="popup__btn-form-submit"
           >
             Сохранить
           </button>
@@ -91,7 +93,7 @@
       </div>
     </div>
     <div class="popup popup_type_add-card">
-      <div class="popup__form-container">
+      <div class="popup__item-container">
         <h2 class="popup__title">Новое место</h2>
         <button type="button" class="popup__btn-close"></button>
         <form
@@ -127,9 +129,54 @@
             />
             <span class="link-input-error popup__form-input-error"></span>
           </label>
-          <button type="submit" form="add-card" class="popup__form-btn-submit">
+          <button type="submit" form="add-card" class="popup__btn-form-submit">
             Создать
           </button>
+        </form>
+      </div>
+    </div>
+    <div class="popup popup_type_avatar-edit">
+      <div class="popup__item-container">
+        <h2 class="popup__title">Обновить аватар</h2>
+        <button class="popup__btn-close"></button>
+        <form
+          action="#"
+          name="avatar-edit"
+          id="avatar-edit"
+          class="popup__form popup__form_type_avatar-edit"
+          novalidate
+        >
+          <label class="popup__input-wrapper"
+            ><input
+              type="url"
+              name="avatar"
+              form="avatar-edit"
+              required
+              placeholder="Ссылка на картинку"
+              class="popup__form-input popup__form-input_substitution_link-img"
+              id="avatar-link-input"
+            />
+            <span
+              class="avatar-link-input-error popup__form-input-error"
+            ></span>
+          </label>
+          <button type="submit" class="popup__btn-form-submit">
+            Сохранить
+          </button>
+        </form>
+      </div>
+    </div>
+    <div class="popup popup_type_card-delete-confirmation">
+      <div class="popup__item-container">
+        <h2 class="popup__title">Вы&nbsp;уверены?</h2>
+        <button type="button" class="popup__btn-close"></button>
+        <form
+          action="#"
+          name="card-delete-confirmation"
+          id="card-delete-confirmation"
+          class="popup__form popup__form_type_card-delete-confirmation"
+        >
+          <button type="submit" class="popup__btn-form-submit">Да</button>
         </form>
       </div>
     </div>

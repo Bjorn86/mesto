@@ -1,6 +1,5 @@
 // IMPORT ELEMENTS
 import {
-  cardsContainerElement,
   nameInputElement,
   jobInputElement
 } from './elements.js';
