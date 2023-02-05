@@ -22,24 +22,20 @@ import {
   editProfileButtonElement,
   // IMPORT CARDS VARIABLES
   cardTemplateSelector,
-  cardsContainerSelector,
-  cardDeleteElement
+  cardsContainerSelector
 } from '../utils/elements.js';
 
 // IMPORT ARRAYS AND OBJECTS
 import {
-  // IMPORT INITIAL CARDS ARRAY
-  initialCards,
   // IMPORT VALIDATION CONFIG
   validationConfig
 } from '../utils/constants.js';
 
 import {
-  handleCardClick,
   handleEditProfileDataSubstitution
 } from '../utils/utils.js';
 
-// CLASS IMPORT
+// CLASS AND CLASS INSTANCE IMPORT
 import { Section } from '../components/Section.js';
 import { Card } from '../components/Card.js';
 import { FormValidator } from '../components/FormValidator.js';
@@ -47,11 +43,24 @@ import { PopupWithImage } from '../components/PopupWithImage.js';
 import { PopupWithForm } from '../components/PopupWithForm.js';
 import { PopupWithConfirmation } from '../components/PopupWithConfirmation';
 import { UserInfo } from '../components/UserInfo.js';
+import { api } from '../components/Api.js';
+
+// GETTING PRIMARY DATA FROM THE SERVER
+Promise.all([api.getUserInfo(), api.getInitialCards()])
+  .then((data) => {
+    userInfo.setUserInfo(data[0]);
+    userInfo.setUserAvatar(data[0]);
+    cardList.renderItems(data[1].reverse());
+  })
+  .catch((err) => {
+    console.log(err);
+  })
 
 // CREATE USER INFO CLASS INSTANCE
 const userInfo = new UserInfo({
   profileNameSelector: '.profile__user-name',
-  profileJobSelector: '.profile__user-job'
+  profileAboutSelector: '.profile__user-about',
+  profileAvatarSelector: '.profile__avatar'
 });
 
 // CREATE POPUP WITH IMAGE CLASS INSTANCE
@@ -61,55 +70,130 @@ popupWithImage.setEventListeners();
 // CREATE POPUP WITH EDIT PROFILE FORM CLASS INSTANCE
 const popupEditProfile = new PopupWithForm({
   handleFormSubmit: (userData) => {
-    userInfo.setUserInfo(userData);
-    popupEditProfile.close();
+    popupEditProfile.setOnloadButtonText('Сохранение...');
+    api.sendUserInfo(userData)
+      .then((newUserData) => {
+        userInfo.setUserInfo(newUserData);
+      })
+      .then(() => {
+        popupEditProfile.setOnloadButtonText('Сохранить');
+      })
+      .catch((err) => {
+        console.log(err);
+      })
+      .finally(() => {
+        popupEditProfile.close();
+      })
   }
 }, editProfilePopupSelector);
 popupEditProfile.setEventListeners();
 
 // CREATE POPUP WITH ADD CARD FORM CLASS INSTANCE
 const popupAddCard = new PopupWithForm({
-  handleFormSubmit: (placeData) => {
-    const newCard = createCard(placeData);
-    cardList.addItem(newCard);
-    popupAddCard.close();
+  handleFormSubmit: (cardData) => {
+    popupAddCard.setOnloadButtonText('Сохранение...');
+    api.sendNewCardInfo(cardData)
+      .then((newCardData) => {
+        const newCard = createCard(newCardData);
+        cardList.addItem(newCard);
+      })
+      .then(() => {
+        popupAddCard.setOnloadButtonText('Создать');
+      })
+      .catch((err) => {
+        console.log(err);
+      })
+      .finally(() => {
+        popupAddCard.close();
+      })
   }
 }, addCardPopupSelector);
 popupAddCard.setEventListeners();
 
 // CREATE POPUP WITH AVATAR EDIT FORM CLASS INSTANCE
 const popupEditAvatar = new PopupWithForm({
-  handleFormSubmit: () => {
-    popupEditAvatar.close()
+  handleFormSubmit: (avatarData) => {
+    popupEditAvatar.setOnloadButtonText('Сохранение...');
+    api.setUserAvatar(avatarData)
+      .then((newAvatarData) => {
+        userInfo.setUserAvatar(newAvatarData);
+      })
+      .then(() => {
+        popupEditAvatar.setOnloadButtonText('Сохранить');
+      })
+      .catch((err) => {
+        console.log(err);
+      })
+      .finally(() => {
+        popupEditAvatar.close();
+      })
   }
 }, editAvatarPopupSelector);
 popupEditAvatar.setEventListeners();
 
 // CREATE POPUP WITH DELETE CARD FORM CLASS INSTANCE
-const popupDeleteCard = new PopupWithConfirmation({
-  handleFormSubmit: () => {
-    popupDeleteCard.close()
-  }
-}, deleteCardPopupSelector);
+const popupDeleteCard = new PopupWithConfirmation(deleteCardPopupSelector);
 popupDeleteCard.setEventListeners();
 
 // CARD CREATE FUNCTION
 const createCard = (item) => {
-  const card = new Card (item, cardTemplateSelector, handleCardClick);
+  const card = new Card (item, cardTemplateSelector, {
+    userId: userInfo.giveUserId(),
+    handleCardClick: (cardTitleElement, cardImageElement) => {
+      popupWithImage.open(cardTitleElement, cardImageElement);
+    },
+    handleDeleteClick: (id) => {
+      popupDeleteCard.open();
+      popupDeleteCard.handleFormSubmit(() => {
+        popupDeleteCard.setOnloadButtonText('Удаление...');
+        api.deleteCard(id)
+        .then(() => {
+          card.deleteCard();
+        })
+        .then(() => {
+          popupDeleteCard.setOnloadButtonText('Да');
+        })
+        .catch((err) => {
+          console.log(err);
+        })
+        .finally(() => {
+          popupDeleteCard.close();
+        })
+      })
+    },
+    handleCardLike: (id) => {
+      if (item.likes.find((user) => user._id === userInfo.giveUserId())) {
+        api.deleteCardLike(id)
+          .then((cardData) => {
+            item = cardData;
+            card.handleCardLikeCounterUpdate(cardData)
+          })
+          .catch((err) => {
+            console.log(err);
+          })
+      } else {
+        api.setCardLike(id)
+          .then((cardData) => {
+            item = cardData;
+            card.handleCardLikeCounterUpdate(cardData)
+          })
+          .catch((err) => {
+            console.log(err);
+          })
+      }
+    }
+  });
   const cardElement = card.generateCard();
   return cardElement;
 }
 
 // CREATING AN CLASS INSTANCE WITH CARDS
 const cardList = new Section({
-  items: initialCards,
   renderer: (item) => {
     cardList.addItem(createCard(item));
   }
 }, cardsContainerSelector);
 
-// INITIAL CARDS RENDER
-cardList.renderItems();
 
 // CREATE VALIDATION FUNCTION
 const createFormValidator = (formElement) => {
@@ -119,11 +203,11 @@ const createFormValidator = (formElement) => {
 
 // INITIATING VALIDATION OF THE PROFILE EDITING FORM
 const editProfileFormValidator = createFormValidator(editProfileFormElement);
-editProfileFormValidator.enableValidation(editProfileFormElement);
+editProfileFormValidator.enableValidation();
 
 // INITIATION OF VALIDATION OF THE CARD ADDITION FORM
 const addCardFormValidator = createFormValidator(addCardFormElement);
-addCardFormValidator.enableValidation(addCardFormElement);
+addCardFormValidator.enableValidation();
 
 // INITIATING VALIDATION OF THE PROFILE EDITING FORM
 const editAvatarFormValidator = createFormValidator(editAvatarPopupElement);
@@ -144,6 +228,3 @@ editProfileButtonElement.addEventListener('click', () => {
   editAvatarFormValidator.resetValidationsErrors();
   popupEditAvatar.open();
 });
-/* cardDeleteElement.addEventListener('click', () => {
-  popupDeleteCard.open();
-}) */

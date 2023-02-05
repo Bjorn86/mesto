@@ -20,18 +20,14 @@
       <section class="profile">
         <div class="profile__wrapper">
           <button class="profile__btn-avatar-edit">
-            <img
-              src="<%=require('./images/profile-avatar.jpg')%>"
-              alt="Аватар пользователя"
-              class="profile__avatar"
-            />
+            <img src="" alt="Аватар пользователя" class="profile__avatar" />
           </button>
           <div class="profile__user-wrapper">
             <div class="profile__user-edit">
-              <h1 class="profile__user-name">Жак-Ив Кусто</h1>
+              <h1 class="profile__user-name"></h1>
               <button type="button" class="profile__btn-edit"></button>
             </div>
-            <p class="profile__user-job">Исследователь океана</p>
+            <p class="profile__user-about"></p>
           </div>
         </div>
         <button type="button" class="profile__btn-add"></button>
@@ -71,16 +67,16 @@
           <label class="popup__input-wrapper">
             <input
               type="text"
-              name="job"
+              name="about"
               form="edit-profile"
               required
               placeholder="Опишите кто вы"
               minlength="2"
               maxlength="200"
-              class="popup__form-input popup__form-input_substitution_job"
-              id="job-input"
+              class="popup__form-input popup__form-input_substitution_about"
+              id="about-input"
             />
-            <span class="job-input-error popup__form-input-error"></span>
+            <span class="about-input-error popup__form-input-error"></span>
           </label>
           <button
             type="submit"

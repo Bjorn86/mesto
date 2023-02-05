@@ -6,6 +6,7 @@
   border: none;
   border-radius: 50%;
   cursor: pointer;
+  background-color: transparent;
 }
 
 .profile__btn-avatar-edit::before {

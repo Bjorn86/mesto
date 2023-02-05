@@ -5,7 +5,7 @@ export const ESCAPE_BUTTON = 'Escape';
 export const editProfilePopupSelector = '.popup_type_edit-profile';
 export const editProfileFormElement = document.querySelector('.popup__form_type_edit-profile');
 export const nameInputElement = editProfileFormElement.querySelector('.popup__form-input_substitution_name');
-export const jobInputElement = editProfileFormElement.querySelector('.popup__form-input_substitution_job');
+export const aboutInputElement = editProfileFormElement.querySelector('.popup__form-input_substitution_about');
 
 // ADD CARD POPUP VARIABLES
 export const addCardPopupSelector = '.popup_type_add-card';
@@ -30,4 +30,3 @@ export const editProfileButtonElement = profileElement.querySelector('.profile__
 // CARDS VARIABLES
 export const cardTemplateSelector = '.card-template';
 export const cardsContainerSelector = '.cards__wrapper';
-export const cardDeleteElement = document.querySelector('.card__btn-del');

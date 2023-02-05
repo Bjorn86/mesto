@@ -24,7 +24,7 @@
 @import url('../blocks/profile/__user-edit/profile__user-edit.css');
 @import url('../blocks/profile/__user-name/profile__user-name.css');
 @import url('../blocks/profile/__btn-edit/profile__btn-edit.css');
-@import url('../blocks/profile/__user-job/profile__user-job.css');
+@import url('../blocks/profile/__user-about/profile__user-about.css');
 @import url('../blocks/profile/__btn-add/profile__btn-add.css');
 
 /* CARDS */
@@ -35,6 +35,7 @@
 @import url('../blocks/card/card.css');
 @import url('../blocks/card/__img/card__img.css');
 @import url('../blocks/card/__btn-del/card__btn-del.css');
+@import url('../blocks/card/__btn-del/_inactive/card__btn-del_inactive.css');
 @import url('../blocks/card/__caption/card__caption.css');
 @import url('../blocks/card/__title/card__title.css');
 @import url('../blocks/card/__like-wrapper/card__like-wrapper.css');

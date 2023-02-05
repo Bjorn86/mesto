@@ -8,6 +8,7 @@ export class PopupWithForm extends Popup {
     this._handleFormSubmit = handleFormSubmit;
     this._formElement = this._popup.querySelector('.popup__form');
     this._inputList = this._formElement.querySelectorAll('.popup__form-input');
+    this._submitFormButtonElement = this._formElement.querySelector('.popup__btn-form-submit');
   }
   // POPUP EVENT LISTENERS
   setEventListeners() {
@@ -29,5 +30,9 @@ export class PopupWithForm extends Popup {
   close() {
     this._formElement.reset();
     super.close();
+  }
+  // SET ONLOAD BUTTON TEXT METHOD
+  setOnloadButtonText(text) {
+    this._submitFormButtonElement.textContent = text;
   }
 }

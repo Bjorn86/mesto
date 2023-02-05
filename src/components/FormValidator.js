@@ -19,25 +19,25 @@ export class FormValidator {
     });
     this._formElement.addEventListener('reset', () => {this._submitButtonElement.disabled = true});
   }
-  // TOGGLE BUTTON ACTIVE/DISABLED FUNCTION
+  // TOGGLE BUTTON ACTIVE/DISABLED METHOD
   _toggleButtonState() {
     this._hasInvalidInput(this._inputList)
       ? this._submitButtonElement.disabled = true
       : this._submitButtonElement.disabled = false
   }
-  // CHECK INPUT VALIDITY FUNCTION
+  // CHECK INPUT VALIDITY METHOD
   _checkInputValidity(input) {
     !input.validity.valid
       ? this._showError(input)
       : this._hideError(input)
   }
-  // INVALID INPUT CHECK FUNCTION
+  // INVALID INPUT CHECK METHOD
   _hasInvalidInput() {
     return this._inputList.some((input) => {
       return !input.validity.valid;
     });
   }
-  // ERRORS SHOW/HIDE FUNCTIONS
+  // ERRORS SHOW/HIDE METHOD
   _hideError(input) {
     const errorElement = this._formElement.querySelector(`.${input.id}-error`);
     input.classList.remove(this._inputErrorClass);
@@ -50,7 +50,7 @@ export class FormValidator {
     errorElement.textContent = input.validationMessage;
     errorElement.classList.add(this._errorClass);
   }
-  // RESET VALIDATION ERRORS FUNCTION
+  // RESET VALIDATION ERRORS METHOD
   resetValidationsErrors = () => {
     this._toggleButtonState();
     this._inputList.forEach((input) => {
@@ -59,7 +59,7 @@ export class FormValidator {
       }
     })
   }
-  // ENABLE VALIDATION FUNCTION
+  // ENABLE VALIDATION METHOD
   enableValidation() {
     this._setEventListeners();
   }
