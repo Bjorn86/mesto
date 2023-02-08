@@ -6,10 +6,11 @@ export class Section {
   }
   // RENDER ITEMS METHOD
   renderItems(items) {
-    items.forEach((item) => {this._renderer(item)});
+    items.forEach((item) => {this.addItem(item)});
   }
   // ADD ITEM IN DOM METHOD
-  addItem(element) {
-    this._container.prepend(element);
+  addItem(item) {
+    const card = this._renderer(item);
+    this._container.prepend(card);
   }
 }

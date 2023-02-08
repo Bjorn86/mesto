@@ -14,17 +14,15 @@ export class UserInfo {
     return userData;
   }
   // SET USER INFO METHOD
-  setUserInfo(userData) {
-    this._profileNameElement.textContent = userData.name;
-    this._profileAboutElement.textContent = userData.about;
-    this._userId = userData._id;
+  setUserInfo({ name, about, avatar, _id }) {
+    this._profileNameElement.textContent = name;
+    this._profileAboutElement.textContent = about;
+    this._profileAvatarElement.src = avatar;
+    this._userId = _id;
+
   }
   // RETURN USER ID METHOD
-  giveUserId() {
+  getUserId() {
     return this._userId;
-  }
-  // SET USER AVATAR METHOD
-  setUserAvatar(avatarData) {
-    this._profileAvatarElement.src = avatarData.avatar;
   }
 }

@@ -4,22 +4,23 @@ class Api {
     this._serverUrl = options.baseUrl;
     this._headers = options.headers;
   }
-  // SERVER RESPONSE PROCESSING METHOD
-  _responseProcessing(res) {
+  // CHECKING THE SERVER RESPONSE METHOD
+  _checkResponse(res) {
     return res.ok ? res.json() : Promise.reject(`Ошибка: ${res.status}`);
+  }
+  // REQUEST METHOD
+  _request(url, options) {
+    return fetch(url, options).then(this._checkResponse)
   }
   // GET USER INFO METHOD
   getUserInfo() {
-    return fetch(`${this._serverUrl}/users/me`, {
+    return this._request(`${this._serverUrl}/users/me`, {
       headers: this._headers
     })
-      .then((res) => {
-        return this._responseProcessing(res);
-      })
   }
   // SEND USER INFO METHOD
   sendUserInfo(userData) {
-    return fetch(`${this._serverUrl}/users/me`, {
+    return this._request(`${this._serverUrl}/users/me`, {
       method: 'PATCH',
       headers: this._headers,
       body: JSON.stringify({
@@ -27,35 +28,26 @@ class Api {
         about: `${userData.about}`
       })
     })
-      .then((res) => {
-        return this._responseProcessing(res);
-      })
   }
   // SET USER AVATAR METHOD
   setUserAvatar(avatarData) {
-    return fetch(`${this._serverUrl}/users/me/avatar`, {
+    return this._request(`${this._serverUrl}/users/me/avatar`, {
       method: 'PATCH',
       headers: this._headers,
       body: JSON.stringify({
         avatar: `${avatarData.avatar}`
       })
     })
-      .then((res) => {
-        return this._responseProcessing(res);
-      })
   }
   // GET INITIAL CARDS METHOD
   getInitialCards() {
-    return fetch(`${this._serverUrl}/cards`, {
+    return this._request(`${this._serverUrl}/cards`, {
       headers: this._headers
     })
-      .then((res) => {
-        return this._responseProcessing(res);
-      })
   }
   // SEND NEW CARD INFO METHOD
   sendNewCardInfo(cardData) {
-    return fetch(`${this._serverUrl}/cards`, {
+    return this._request(`${this._serverUrl}/cards`, {
       method: 'POST',
       headers: this._headers,
       body: JSON.stringify({
@@ -63,39 +55,27 @@ class Api {
         link: `${cardData.link}`
       })
     })
-      .then((res) => {
-        return this._responseProcessing(res);
-      })
   }
   // DELETE CARD METHOD
   deleteCard(id) {
-    return fetch(`${this._serverUrl}/cards/${id}`, {
+    return this._request(`${this._serverUrl}/cards/${id}`, {
       method: 'DELETE',
       headers: this._headers
     })
-      .then((res) => {
-        return this._responseProcessing(res);
-      })
   }
   // SET CARD LIKE METHOD
   setCardLike(id) {
-    return fetch(`${this._serverUrl}/cards/${id}/likes`, {
+    return this._request(`${this._serverUrl}/cards/${id}/likes`, {
       method: 'PUT',
       headers: this._headers
     })
-      .then((res) => {
-        return this._responseProcessing(res);
-      })
   }
   //DELETE CARD LIKE METHOD
   deleteCardLike(id) {
-    return fetch(`${this._serverUrl}/cards/${id}/likes`, {
+    return this._request(`${this._serverUrl}/cards/${id}/likes`, {
       method: 'DELETE',
       headers: this._headers
     })
-      .then((res) => {
-        return this._responseProcessing(res);
-      })
   }
 }
 

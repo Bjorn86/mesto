@@ -9,14 +9,21 @@ export class PopupWithForm extends Popup {
     this._formElement = this._popup.querySelector('.popup__form');
     this._inputList = this._formElement.querySelectorAll('.popup__form-input');
     this._submitFormButtonElement = this._formElement.querySelector('.popup__btn-form-submit');
+    this._submitFormButtonText = this._submitFormButtonElement.textContent;
   }
   // POPUP EVENT LISTENERS
   setEventListeners() {
+    super.setEventListeners();
     this._formElement.addEventListener('submit', (evt) => {
       evt.preventDefault();
-      this._handleFormSubmit(this._getInputValues());
+      this._renderLoading(true);
+      this._handleFormSubmit(this._getInputValues())
+        .then(() => this.close())
+        .catch((err) => {
+          console.log(err);
+        })
+        .finally(() => this._renderLoading(false))
     });
-    super.setEventListeners();
   }
   // GET INPUT VALUES METHOD
   _getInputValues() {
@@ -32,7 +39,17 @@ export class PopupWithForm extends Popup {
     super.close();
   }
   // SET ONLOAD BUTTON TEXT METHOD
-  setOnloadButtonText(text) {
-    this._submitFormButtonElement.textContent = text;
+  _renderLoading(isLoading, loadingText='Сохранение...') {
+    if (isLoading) {
+      this._submitFormButtonElement.textContent = loadingText;
+    } else {
+      this._submitFormButtonElement.textContent = this._submitFormButtonText;
+    }
+  }
+  // SET INPUT VALUES METHOD
+  setInputValues(data) {
+    this._inputList.forEach((input) => {
+      input.value = data[input.name];
+    });
   }
 }

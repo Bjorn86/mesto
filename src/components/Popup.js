@@ -10,7 +10,7 @@ export class Popup {
   // POPUP EVENT LISTENERS
   setEventListeners() {
     this._popupCloseButtonElement.addEventListener('click', () => { this.close() });
-    this._popup.addEventListener('click', (evt) => {
+    this._popup.addEventListener('mousedown', (evt) => {
       if (evt.target === evt.currentTarget) {
         this.close();
       }
