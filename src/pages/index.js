@@ -68,13 +68,16 @@ popupWithImage.setEventListeners();
 // CREATE POPUP WITH EDIT PROFILE FORM CLASS INSTANCE
 const popupEditProfile = new PopupWithForm({
   handleFormSubmit: (userData) => {
-    return api.sendUserInfo(userData)
+    popupEditProfile.renderLoading(true);
+    api.sendUserInfo(userData)
       .then((newUserData) => {
         userInfo.setUserInfo(newUserData);
       })
+      .then(() => popupEditProfile.close())
       .catch((err) => {
         console.log(err);
       })
+      .finally(() => popupEditProfile.renderLoading(false))
   }
 }, editProfilePopupSelector);
 popupEditProfile.setEventListeners();
@@ -82,13 +85,16 @@ popupEditProfile.setEventListeners();
 // CREATE POPUP WITH ADD CARD FORM CLASS INSTANCE
 const popupAddCard = new PopupWithForm({
   handleFormSubmit: (cardData) => {
-    return api.sendNewCardInfo(cardData)
+    popupAddCard.renderLoading(true);
+    api.sendNewCardInfo(cardData)
       .then((newCardData) => {
         cardList.addItem(newCardData);
       })
+      .then(() => popupAddCard.close())
       .catch((err) => {
         console.log(err);
       })
+      .finally(() => popupAddCard.renderLoading(false))
   }
 }, addCardPopupSelector);
 popupAddCard.setEventListeners();
@@ -96,13 +102,16 @@ popupAddCard.setEventListeners();
 // CREATE POPUP WITH AVATAR EDIT FORM CLASS INSTANCE
 const popupEditAvatar = new PopupWithForm({
   handleFormSubmit: (avatarData) => {
-    return api.setUserAvatar(avatarData)
+    popupEditAvatar.renderLoading(true);
+    api.setUserAvatar(avatarData)
       .then((newAvatarData) => {
         userInfo.setUserInfo(newAvatarData);
       })
+      .then(() => popupEditAvatar.close())
       .catch((err) => {
         console.log(err);
       })
+      .finally(() => popupEditAvatar.renderLoading(false))
   }
 }, editAvatarPopupSelector);
 popupEditAvatar.setEventListeners();

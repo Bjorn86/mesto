@@ -16,13 +16,7 @@ export class PopupWithForm extends Popup {
     super.setEventListeners();
     this._formElement.addEventListener('submit', (evt) => {
       evt.preventDefault();
-      this._renderLoading(true);
-      this._handleFormSubmit(this._getInputValues())
-        .then(() => this.close())
-        .catch((err) => {
-          console.log(err);
-        })
-        .finally(() => this._renderLoading(false))
+      this._handleFormSubmit(this._getInputValues());
     });
   }
   // GET INPUT VALUES METHOD
@@ -39,7 +33,7 @@ export class PopupWithForm extends Popup {
     super.close();
   }
   // SET ONLOAD BUTTON TEXT METHOD
-  _renderLoading(isLoading, loadingText='Сохранение...') {
+  renderLoading(isLoading, loadingText='Сохранение...') {
     if (isLoading) {
       this._submitFormButtonElement.textContent = loadingText;
     } else {

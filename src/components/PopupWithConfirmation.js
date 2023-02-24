@@ -13,13 +13,7 @@ export class PopupWithConfirmation extends Popup {
   setEventListeners() {
     this._formElement.addEventListener('submit', (evt) => {
       evt.preventDefault();
-      this._renderLoading(true);
-      this._handleFormSubmit()
-        .then(() => this.close())
-        .catch((err) => {
-          console.log(err);
-        })
-        .finally(() => this._renderLoading(false))
+      this._handleFormSubmit();
     });
     super.setEventListeners();
   }
@@ -28,7 +22,7 @@ export class PopupWithConfirmation extends Popup {
     this._handleFormSubmit = func;
   }
   // SET ONLOAD BUTTON TEXT METHOD
-  _renderLoading(isLoading, loadingText='Удаление...') {
+  renderLoading(isLoading, loadingText='Удаление...') {
     if (isLoading) {
       this._submitFormButtonElement.textContent = loadingText;
     } else {

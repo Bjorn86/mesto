@@ -15,13 +15,16 @@ export const handleCardClick = (cardTitleElement, cardImageElement) => {
 export const handleDeleteClick = (card) => {
   popupDeleteCard.open();
   popupDeleteCard.handleFormSubmit(() => {
-    return api.deleteCard(card.getCardId())
+    popupDeleteCard.renderLoading(true);
+    api.deleteCard(card.getCardId())
       .then(() => {
         card.deleteCard();
       })
+      .then(() => popupDeleteCard.close())
       .catch((err) => {
         console.log(err);
       })
+      .finally(() => popupDeleteCard.renderLoading(false))
   })
 }
 
