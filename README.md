@@ -28,7 +28,7 @@
 
 ### Screenshot
 
-![Desktop screenshot](https://disk.yandex.ru/i/F86wstmor-y3Nw)
+![Desktop screenshot](./screenshot/mesto_1.png)
 
 ### Директории проекта
 
